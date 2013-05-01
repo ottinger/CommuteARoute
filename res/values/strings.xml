@@ -14,5 +14,8 @@
     <string name="home">Home</string>
     <string name="stats">Stats</string>
     <string name="report">Report</string>
-	<string name="show_map">Show Map</string>
+    <string name="show_map">Show Map</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_stats">StatsActivity</string>
+
 </resources>

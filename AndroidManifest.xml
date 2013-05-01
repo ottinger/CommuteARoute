@@ -26,6 +26,14 @@
             android:name="com.example.commutearoute.NavbarActivity"
             android:label="@string/title_activity_navbar" >
         </activity>
+        <activity
+            android:name="com.example.commutearoute.MapActivity"
+            android:label="@string/title_activity_map"
+            android:parentActivityName="com.example.commutearoute.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.commutearoute.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

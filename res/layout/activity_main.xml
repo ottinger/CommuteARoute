@@ -58,7 +58,8 @@
         android:layout_below="@id/radio_transport_mode"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="@string/go" />
+        android:text="@string/go" 
+        android:onClick="goToMap" />
 
     <EditText
         android:id="@+id/edit_end"
@@ -92,7 +93,7 @@
         android:text="@string/start" />
 
     <!-- <include layout="@layout/activity_navbar"/> -->
-
+  <!-- 
     <RadioGroup
         android:id="@+id/navbar"
         android:layout_width="fill_parent"
@@ -132,5 +133,5 @@
             android:background="@drawable/navbar_map_selector"
             android:text="@string/show_map" />
     </RadioGroup>
-
+ -->
 </RelativeLayout>

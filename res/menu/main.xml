@@ -1,9 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings"/>
+        android:id="@+id/home"
+        android:icon="@drawable/home"
+        android:showAsAction="always"
+        android:title="@string/home"/>
+    <item
+        android:id="@+id/stats"
+        android:icon="@drawable/stats"
+        android:showAsAction="always"
+        android:title="@string/stats"/>
+    <item
+        android:id="@+id/report"
+		android:icon="@drawable/report"
+        android:showAsAction="always"
+        android:title="@string/report"/>
+    <item
+        android:id="@+id/map"
+        android:icon="@drawable/show_map"
+        android:showAsAction="always"
+        android:title="@string/show_map" />
 
 </menu>
