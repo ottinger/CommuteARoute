@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CommuteARoute</string>
+    <string name="action_settings">Settings</string>
+    <string name="choose_route">Choose route:</string>
+    <string name="start">Start:</string>
+    <string name="end">End:</string>
+    <string name="edit_start">Current Location</string>
+    <string name="edit_end">Work</string>
+    <string name="go">Go!</string>
+    <string name="title_activity_navbar">NavbarActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="home">Home</string>
+    <string name="stats">Stats</string>
+    <string name="report">Report</string>
+	<string name="show_map">Show Map</string>
+</resources>

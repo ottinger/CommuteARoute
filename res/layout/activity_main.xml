@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp" >
+
+    <EditText
+        android:id="@+id/edit_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/start"
+        android:hint="@string/edit_start" />
+
+   <RadioGroup
+        android:id="@+id/radio_transport_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_below="@+id/edit_end"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/navbar_background"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/car"
+            android:layout_width="60dip"
+            android:background="@drawable/car_custom"
+            android:button="@null"
+            android:checked="true" />
+
+        <RadioButton
+            android:id="@+id/transit"
+            android:layout_width="90dip"
+            android:layout_marginLeft="5dp" 
+            android:button="@null"
+            android:background="@drawable/bus_custom" />
+
+        <RadioButton
+            android:id="@+id/bike"
+            android:layout_width="70dip"
+            android:layout_marginLeft="5dp"
+            android:button="@null"
+            android:background="@drawable/bike_custom" />
+
+        <RadioButton
+            android:id="@+id/walk"
+            android:layout_width="36dp"
+            android:layout_marginLeft="5dp"
+            android:button="@null"
+            android:background="@drawable/walk_custom" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/go_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/radio_transport_mode"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/go" />
+
+    <EditText
+        android:id="@+id/edit_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/edit_start"
+        android:layout_below="@+id/edit_start"
+        android:ems="10"
+        android:hint="@string/edit_end"
+        android:inputType="textPostalAddress" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/edit_end"
+        android:layout_alignBottom="@+id/edit_end"
+        android:layout_alignLeft="@+id/radio_transport_mode"
+        android:text="@string/end" />
+
+    <TextView
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/edit_start"
+        android:layout_alignBottom="@+id/edit_start"
+        android:layout_alignLeft="@+id/end"
+        android:text="@string/start" />
+
+    <!-- <include layout="@layout/activity_navbar"/> -->
+
+    <RadioGroup
+        android:id="@+id/navbar"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/navbar_background"
+        android:orientation="horizontal" >
+        
+        <RadioButton
+            android:id="@+id/home_button"
+            style="@style/navbar_button"
+            android:layout_width="50dip"
+            android:background="@drawable/navbar_home_selector"
+            android:text="@string/home" />
+
+        <RadioButton
+            android:id="@+id/stats_button"
+            style="@style/navbar_button"
+            android:layout_marginLeft="5dp"
+            android:layout_width="50dip"
+            android:background="@drawable/navbar_stats_selector"
+            android:text="@string/stats" />
+
+        <RadioButton
+            android:id="@+id/report_button"
+            style="@style/navbar_button"
+            android:layout_marginLeft="5dp"
+            android:layout_width="50dip"
+            android:background="@drawable/navbar_report_selector"
+            android:text="@string/report" />
+
+        <RadioButton
+            android:id="@+id/show_map_button"
+            style="@style/navbar_button"
+            android:layout_marginLeft="5dp"
+            android:layout_width="50dip"
+            android:background="@drawable/navbar_map_selector"
+            android:text="@string/show_map" />
+    </RadioGroup>
+
+</RelativeLayout>
