@@ -24,10 +24,13 @@ public class MapActivity extends MainActivity {
 		Intent intent = getIntent();
 		String destination = intent.getStringExtra(MainActivity.DESTINATION);
 		
+		// Get the mode of transportatoin from the intent
+		String mode = intent.getStringExtra(MainActivity.TRANSPORT_MODE);
+		
 		// Create the text view
 		TextView textView = (TextView) findViewById(R.id.destination);
 		textView.setTextSize(40);
-		textView.setText(destination);
+		textView.setText(destination + "\n" + mode);
 	}
 
 	/**

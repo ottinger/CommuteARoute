@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="11"
         android:targetSdkVersion="17" />
 
     <application
@@ -33,6 +33,27 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.commutearoute.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.commutearoute.StatsActivity"
+            android:label="@string/title_activity_stats"
+            android:parentActivityName="com.example.commutearoute.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.commutearoute.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.commutearoute.ReportActivity"
+            android:label="@string/title_activity_report"
+            android:parentActivityName="com.example.commutearoute.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.commutearoute.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.commutearoute.SignUpActivity"
+            android:label="@string/title_activity_sign_up"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
     </application>
 

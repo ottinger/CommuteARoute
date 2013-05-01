@@ -5,14 +5,33 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp" >
+	
+    <ImageView
+        android:id="@+id/profile_pic"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:maxHeight="15sp"
+        android:maxWidth="15sp"
+        android:src="@drawable/prof_pic"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/profile_pic" />
 
-    <EditText
-        android:id="@+id/edit_start"
+    <TextView
+        android:id="@+id/level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/start"
-        android:hint="@string/edit_start" />
-
+        android:layout_toRightOf="@+id/profile_pic"
+        android:layout_marginLeft="40dp" />
+    
+    <TextView
+        android:id="@+id/latest_traffic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/latest_traffic"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/go_button" />
+    
    <RadioGroup
         android:id="@+id/radio_transport_mode"
         android:layout_width="wrap_content"
@@ -27,28 +46,32 @@
             android:layout_width="60dip"
             android:background="@drawable/car_custom"
             android:button="@null"
-            android:checked="true" />
+            android:checked="true" 
+            android:tag="@string/car" />
 
         <RadioButton
             android:id="@+id/transit"
             android:layout_width="90dip"
             android:layout_marginLeft="5dp" 
             android:button="@null"
-            android:background="@drawable/bus_custom" />
+            android:background="@drawable/bus_custom"
+            android:tag="@string/transit" />
 
         <RadioButton
             android:id="@+id/bike"
             android:layout_width="70dip"
             android:layout_marginLeft="5dp"
             android:button="@null"
-            android:background="@drawable/bike_custom" />
+            android:background="@drawable/bike_custom"
+            android:tag="@string/bike" />
 
         <RadioButton
             android:id="@+id/walk"
             android:layout_width="36dp"
             android:layout_marginLeft="5dp"
             android:button="@null"
-            android:background="@drawable/walk_custom" />
+            android:background="@drawable/walk_custom"
+            android:tag="@string/walk" />
     </RadioGroup>
 
     <Button
@@ -134,4 +157,14 @@
             android:text="@string/show_map" />
     </RadioGroup>
  -->
+
+    <EditText
+        android:id="@+id/edit_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_pic"
+        android:layout_toRightOf="@+id/start"
+        android:ems="10"
+        android:hint="@string/edit_start" />
+
 </RelativeLayout>

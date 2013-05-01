@@ -17,5 +17,19 @@
     <string name="show_map">Show Map</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="title_activity_stats">StatsActivity</string>
-
+ <!--    <string name="title_stat_list">Stats</string>
+    <string name="title_stat_detail">Stat Detail</string> -->
+    <string name="title_summary">Summary</string>
+    <string name="title_alternatives">Alternatives</string>
+    <string name="title_graphs">Graphs</string>
+    <string name="title_activity_report">ReportActivity</string>
+    <string name="title_report_simple">Simple</string>
+    <string name="title_report_advanced">Advanced</string>
+    <string name="profile_pic">Profile Picture</string>
+    <string name="latest_traffic">Latest Traffic Alerts</string>
+	<string name="car">Car</string>
+	<string name="transit">Transit</string>
+	<string name="bike">Bike</string>
+	<string name="walk">Walk</string>
+	
 </resources>

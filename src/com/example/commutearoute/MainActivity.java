@@ -9,16 +9,21 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
 	public final static String DESTINATION = "com.example.commutearoute.DESTINATION";
+	public final static String TRANSPORT_MODE = "com.example.commutearoute.TRANSPORT_MODE";
+	public final static String LEVEL = "LEVEL";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		setLevel();
 	}
 	
 	// This was code for old navbar on bottom before discovering ActionBar/OptionsMenu
@@ -51,13 +56,29 @@ public class MainActivity extends Activity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent;
+		// Handle item selection
 	    switch (item.getItemId()) {
-	        case android.R.id.home:
-	            // app icon in action bar clicked; go home
-	            Intent intent = new Intent(this, MainActivity.class);
-	            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	        case R.id.home:
+	        	// app icon in action bar clicked; go home
+	        	intent = new Intent(this, MainActivity.class);
+	        	startActivity(intent);
+	        	return true;
+	        case R.id.stats:
+	        	// stats icon clicked; go to stats page
+	        	intent = new Intent(this, StatsActivity.class);
 	            startActivity(intent);
 	            return true;
+	        case R.id.report:
+	        	// report button clicked; go to report page
+	        	intent = new Intent(this, ReportActivity.class);
+	        	startActivity(intent);
+	        	return true;
+	        case R.id.map:
+	        	// show map button clicked; go to map
+	        	intent = new Intent(this, MapActivity.class);
+	        	startActivity(intent);
+	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
@@ -65,11 +86,25 @@ public class MainActivity extends Activity {
 	
 	 /** Called when user clicks the Go button */
     public void goToMap(View view) {
-    	// Do something in response to button
+    	// Add destination address
     	Intent intent = new Intent(this, MapActivity.class);
     	EditText editText = (EditText) findViewById(R.id.edit_end);
     	String destination = editText.getText().toString();
     	intent.putExtra(DESTINATION, destination);
+    	
+    	// Add mode of transportation
+    	RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_transport_mode);
+    	int selected = radioGroup.getCheckedRadioButtonId();
+    	RadioButton button = (RadioButton) findViewById(selected);
+    	intent.putExtra(TRANSPORT_MODE, button.getTag().toString());
+    	
     	startActivity(intent);
+    }
+    
+    /** Gives the current level of the user */
+    public void setLevel() {
+    	String level = LEVEL + Integer.toString(1);
+    	TextView textView = (TextView) findViewById(R.id.level);
+    	textView.setText(level);
     }
 }
