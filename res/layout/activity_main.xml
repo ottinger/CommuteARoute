@@ -6,21 +6,31 @@
     android:paddingRight="16dp"
     android:paddingTop="16dp" >
 	
-    <ImageView
+    <ImageButton
         android:id="@+id/profile_pic"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:maxHeight="15sp"
         android:maxWidth="15sp"
-        android:src="@drawable/prof_pic"
+        android:background="@drawable/prof_pic"
         android:layout_alignParentTop="true"
-        android:contentDescription="@string/profile_pic" />
+        android:contentDescription="@string/profile_pic" 
+        android:onClick="goToProfile" />
 
+    <TextView
+        android:id="@+id/username_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/profile_pic"
+		android:layout_marginBottom="5dp" 
+		android:layout_marginLeft="40dp" />
+    
     <TextView
         android:id="@+id/level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/profile_pic"
+        android:layout_below="@+id/username_field"
         android:layout_marginLeft="40dp" />
     
     <TextView
@@ -116,47 +126,7 @@
         android:text="@string/start" />
 
     <!-- <include layout="@layout/activity_navbar"/> -->
-  <!-- 
-    <RadioGroup
-        android:id="@+id/navbar"
-        android:layout_width="fill_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/navbar_background"
-        android:orientation="horizontal" >
-        
-        <RadioButton
-            android:id="@+id/home_button"
-            style="@style/navbar_button"
-            android:layout_width="50dip"
-            android:background="@drawable/navbar_home_selector"
-            android:text="@string/home" />
 
-        <RadioButton
-            android:id="@+id/stats_button"
-            style="@style/navbar_button"
-            android:layout_marginLeft="5dp"
-            android:layout_width="50dip"
-            android:background="@drawable/navbar_stats_selector"
-            android:text="@string/stats" />
-
-        <RadioButton
-            android:id="@+id/report_button"
-            style="@style/navbar_button"
-            android:layout_marginLeft="5dp"
-            android:layout_width="50dip"
-            android:background="@drawable/navbar_report_selector"
-            android:text="@string/report" />
-
-        <RadioButton
-            android:id="@+id/show_map_button"
-            style="@style/navbar_button"
-            android:layout_marginLeft="5dp"
-            android:layout_width="50dip"
-            android:background="@drawable/navbar_map_selector"
-            android:text="@string/show_map" />
-    </RadioGroup>
- -->
 
     <EditText
         android:id="@+id/edit_start"
@@ -165,6 +135,7 @@
         android:layout_below="@+id/profile_pic"
         android:layout_toRightOf="@+id/start"
         android:ems="10"
-        android:hint="@string/edit_start" />
-
+        android:hint="@string/edit_start" 
+        android:inputType="text"    />
+    
 </RelativeLayout>

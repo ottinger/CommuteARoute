@@ -3,6 +3,7 @@ package com.example.commutearoute;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,9 +24,27 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		setLevel();
+		
+		// TODO: lookup level from past use -- OR from username database
+		Integer currentLevel = 1;
+		setLevel(currentLevel);
+		populateUsername();
 	}
 	
+	/** 
+	 * Populate the username field. Currently retrieves from sign in page
+	 * TODO: Store username elsewhere after first login and retrieve from there
+	 */
+	private void populateUsername() {
+		// get the username from signupactivity
+		Intent intent = getIntent();
+		String username = intent.getStringExtra(SignUpActivity.USERNAME);
+		
+		// create the text view
+		TextView textView = (TextView) findViewById(R.id.username_field);
+		textView.setText(username);
+	}
+
 	// This was code for old navbar on bottom before discovering ActionBar/OptionsMenu
 	/*
 		RadioButton radioButton;
@@ -86,8 +105,9 @@ public class MainActivity extends Activity {
 	
 	 /** Called when user clicks the Go button */
     public void goToMap(View view) {
-    	// Add destination address
     	Intent intent = new Intent(this, MapActivity.class);
+    	
+    	// Add destination address
     	EditText editText = (EditText) findViewById(R.id.edit_end);
     	String destination = editText.getText().toString();
     	intent.putExtra(DESTINATION, destination);
@@ -101,10 +121,17 @@ public class MainActivity extends Activity {
     	startActivity(intent);
     }
     
+    /**
+     *  Called when user clicks the profile picture, sending them to profile screen
+     */
+    public void goToProfile(View view) {
+    	Intent intent = new Intent(this, ProfileActivity.class);
+    	startActivity(intent);
+    }
+    
     /** Gives the current level of the user */
-    public void setLevel() {
-    	String level = LEVEL + Integer.toString(1);
+    public void setLevel(Integer currentLevel) {
     	TextView textView = (TextView) findViewById(R.id.level);
-    	textView.setText(level);
+    	textView.setText(Html.fromHtml(LEVEL + "<b>" + Integer.toString(currentLevel)));
     }
 }

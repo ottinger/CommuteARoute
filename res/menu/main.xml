@@ -9,7 +9,7 @@
     <item
         android:id="@+id/stats"
         android:icon="@drawable/stats"
-        android:showAsAction="always"
+        android:showAsAction="ifRoom"
         android:title="@string/stats"/>
     <item
         android:id="@+id/report"

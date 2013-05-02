@@ -37,7 +37,7 @@ public class ReportActivity extends FragmentActivity implements
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	ViewPager mViewPager;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -159,20 +159,27 @@ public class ReportActivity extends FragmentActivity implements
 
 		@Override
 		public Fragment getItem(int position) {
+			Fragment fragment = null;
 			// getItem is called to instantiate the fragment for the given page.
-			// Return a DummySectionFragment (defined as a static inner class
-			// below) with the page number as its lone argument.
-			Fragment fragment = new DummySectionFragment();
+			switch (position) {
+			case 0:
+				fragment = new ReportSimpleFragment();
+				return fragment;
+			case 1:
+				fragment = new ReportAdvancedFragment();
+				return fragment;
+			}
+	/*		ReportSimpleFragment fragment =  new ReportSimpleFragment();
 			Bundle args = new Bundle();
-			args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-			fragment.setArguments(args);
+			args.putInt(ReportSectionFragment.ARG_SECTION_NUMBER, position + 1);
+			fragment.setArguments(args); */
 			return fragment;
 		}
 
 		@Override
 		public int getCount() {
-			// Show 3 total pages.
-			return 3;
+			// Show 2 total pages.
+			return 2;
 		}
 
 		@Override
@@ -185,33 +192,6 @@ public class ReportActivity extends FragmentActivity implements
 				return getString(R.string.title_report_advanced).toUpperCase(l);
 			}
 			return null;
-		}
-	}
-
-	/**
-	 * A dummy fragment representing a section of the app, but that simply
-	 * displays dummy text.
-	 */
-	public static class DummySectionFragment extends Fragment {
-		/**
-		 * The fragment argument representing the section number for this
-		 * fragment.
-		 */
-		public static final String ARG_SECTION_NUMBER = "section_number";
-
-		public DummySectionFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_report_dummy,
-					container, false);
-			TextView dummyTextView = (TextView) rootView
-					.findViewById(R.id.section_label);
-			dummyTextView.setText(Integer.toString(getArguments().getInt(
-					ARG_SECTION_NUMBER)));
-			return rootView;
 		}
 	}
 

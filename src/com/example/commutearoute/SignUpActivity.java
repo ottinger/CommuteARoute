@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 /**
@@ -28,21 +31,26 @@ public class SignUpActivity extends Activity {
 			"foo@example.com:hello", "bar@example.com:world" };
 
 	/**
-	 * The default email to populate the email field with.
+	 * The default username field
 	 */
-	public static final String EXTRA_EMAIL = "com.example.android.authenticatordemo.extra.EMAIL";
+	 public static final String USERNAME = "com.example.commutearoute.USERNAME";
+	
+	/**
+	 * The default Username to populate the Username field with.
+	 */
+	public static final String EXTRA_USERNAME = "com.example.android.authenticatordemo.extra.Username";
 
 	/**
 	 * Keep track of the login task to ensure we can cancel it if requested.
 	 */
 	private UserLoginTask mAuthTask = null;
 
-	// Values for email and password at the time of the login attempt.
-	private String mEmail;
+	// Values for Username and password at the time of the login attempt.
+	private String mUsername;
 	private String mPassword;
 
 	// UI references.
-	private EditText mEmailView;
+	private EditText mUsernameView;
 	private EditText mPasswordView;
 	private View mLoginFormView;
 	private View mLoginStatusView;
@@ -55,9 +63,9 @@ public class SignUpActivity extends Activity {
 		setContentView(R.layout.activity_sign_up);
 
 		// Set up the login form.
-		mEmail = getIntent().getStringExtra(EXTRA_EMAIL);
-		mEmailView = (EditText) findViewById(R.id.username);
-		mEmailView.setText(mEmail);
+		mUsername = getIntent().getStringExtra(EXTRA_USERNAME);
+		mUsernameView = (EditText) findViewById(R.id.username);
+		mUsernameView.setText(mUsername);
 
 		mPasswordView = (EditText) findViewById(R.id.password);
 		mPasswordView
@@ -95,7 +103,7 @@ public class SignUpActivity extends Activity {
 
 	/**
 	 * Attempts to sign in or register the account specified by the login form.
-	 * If there are form errors (invalid email, missing fields, etc.), the
+	 * If there are form errors (invalid Username, missing fields, etc.), the
 	 * errors are presented and no actual login attempt is made.
 	 */
 	public void attemptLogin() {
@@ -104,11 +112,11 @@ public class SignUpActivity extends Activity {
 		}
 
 		// Reset errors.
-		mEmailView.setError(null);
+		mUsernameView.setError(null);
 		mPasswordView.setError(null);
 
 		// Store values at the time of the login attempt.
-		mEmail = mEmailView.getText().toString();
+		mUsername = mUsernameView.getText().toString();
 		mPassword = mPasswordView.getText().toString();
 
 		boolean cancel = false;
@@ -125,14 +133,11 @@ public class SignUpActivity extends Activity {
 			cancel = true;
 		}
 
-		// Check for a valid email address.
-		if (TextUtils.isEmpty(mEmail)) {
-			mEmailView.setError(getString(R.string.error_field_required));
-			focusView = mEmailView;
-			cancel = true;
-		} else if (!mEmail.contains("@")) {
-			mEmailView.setError(getString(R.string.error_invalid_email));
-			focusView = mEmailView;
+		// Check for a valid Username 
+		// TODO: change this to if taken. Can't only check if empty
+		if (TextUtils.isEmpty(mUsername)) {
+			mUsernameView.setError(getString(R.string.error_field_required));
+			focusView = mUsernameView;
 			cancel = true;
 		}
 
@@ -141,12 +146,23 @@ public class SignUpActivity extends Activity {
 			// form field with an error.
 			focusView.requestFocus();
 		} else {
-			// Show a progress spinner, and kick off a background task to
+			// Logged in correctly. Go to Home screen.
+
+			Intent intent = new Intent(this, MainActivity.class);
+			
+			// get the username
+			EditText e = (EditText) findViewById(R.id.username);
+			String username = e.getText().toString();
+			intent.putExtra(USERNAME, username);
+
+		    startActivity(intent);
+		/*	// Show a progress spinner, and kick off a background task to
 			// perform the user login attempt.
 			mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
 			showProgress(true);
 			mAuthTask = new UserLoginTask();
 			mAuthTask.execute((Void) null);
+			*/
 		}
 	}
 
@@ -190,7 +206,7 @@ public class SignUpActivity extends Activity {
 			mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
 		}
 	}
-
+	
 	/**
 	 * Represents an asynchronous login/registration task used to authenticate
 	 * the user.
@@ -209,7 +225,7 @@ public class SignUpActivity extends Activity {
 
 			for (String credential : DUMMY_CREDENTIALS) {
 				String[] pieces = credential.split(":");
-				if (pieces[0].equals(mEmail)) {
+				if (pieces[0].equals(mUsername)) {
 					// Account exists, return true if the password matches.
 					return pieces[1].equals(mPassword);
 				}

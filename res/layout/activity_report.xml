@@ -3,4 +3,18 @@
     android:id="@+id/pager"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ReportActivity" />
+    tools:context=".ReportActivity" >
+
+   <!--  <fragment
+        android:id="@+id/simple_fragment"
+        android:name="com.example.commutearoute.ReportSimpleFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <fragment
+        android:id="@+id/advanced_fragment"
+        android:name="com.example.commutearoute.ReportAdvancedFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+-->
+</android.support.v4.view.ViewPager>
