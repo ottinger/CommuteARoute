@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <item
+   <!--  <item
         android:id="@+id/home"
         android:icon="@drawable/home"
         android:showAsAction="always"
-        android:title="@string/home"/>
+        android:title="@string/home"/> -->
     <item
         android:id="@+id/stats"
         android:icon="@drawable/stats"
-        android:showAsAction="ifRoom"
+        android:showAsAction="always"
         android:title="@string/stats"/>
     <item
         android:id="@+id/report"
@@ -18,7 +18,7 @@
         android:title="@string/report"/>
     <item
         android:id="@+id/map"
-        android:icon="@drawable/show_map"
+        android:icon="@drawable/map"
         android:showAsAction="always"
         android:title="@string/show_map" />
 

@@ -78,12 +78,12 @@ public class MainActivity extends Activity {
 		Intent intent;
 		// Handle item selection
 	    switch (item.getItemId()) {
-	        case R.id.home:
+	  /*      case R.id.home:
 	        	// app icon in action bar clicked; go home
 	        	intent = new Intent(this, MainActivity.class);
 	        	startActivity(intent);
 	        	return true;
-	        case R.id.stats:
+	  */      case R.id.stats:
 	        	// stats icon clicked; go to stats page
 	        	intent = new Intent(this, StatsActivity.class);
 	            startActivity(intent);

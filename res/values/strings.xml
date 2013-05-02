@@ -29,5 +29,9 @@
     <string name="bike">Bike</string>
     <string name="walk">Walk</string>
     <string name="title_activity_profile">User Profile</string>
+    <string name="home_address">HOME ADDRESS:</string>
+    <string name="work_address">WORK ADDRESS:</string>
+    <string name="car_make">CAR MAKE:</string>
+    <string name="car_model">CAR MODEL:</string>
 
 </resources>

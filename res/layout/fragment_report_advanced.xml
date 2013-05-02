@@ -34,7 +34,7 @@
         android:id="@+id/btn_construction"
         android:layout_width="200dp"
         android:layout_height="100dp"
-        android:layout_below="@+id/btn_construction"
+        android:layout_below="@+id/btn_bad_road"
         android:layout_centerHorizontal="true"
         android:background="@drawable/report_btn_construction" />
 
