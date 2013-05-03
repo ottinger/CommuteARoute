@@ -41,5 +41,7 @@
     <string name="change_car_model">Change Car Model</string>
     <string name="cancel">Cancel</string>
     <string name="apply">Apply</string>
+    <string name="skip">Skip Tutorial</string>
+    <string name="cont">Continue</string>
 
 </resources>
