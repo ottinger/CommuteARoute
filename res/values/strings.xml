@@ -13,7 +13,7 @@
     <string name="home">Home</string>
     <string name="stats">Stats</string>
     <string name="report">Report</string>
-    <string name="show_map">Show Map</string>
+    <string name="show_map">Map</string>
     <string name="title_activity_map">Map</string>
     <string name="title_activity_stats">Stats</string>
     <string name="title_summary">Summary</string>
@@ -33,5 +33,13 @@
     <string name="work_address">WORK ADDRESS:</string>
     <string name="car_make">CAR MAKE:</string>
     <string name="car_model">CAR MODEL:</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="change_home">Change Home Address</string>
+    <string name="change_work">Change Work Address</string>
+    <string name="change_car_make">Change Car Make</string>
+    <string name="change_car_model">Change Car Model</string>
+    <string name="cancel">Cancel</string>
+    <string name="apply">Apply</string>
 
 </resources>

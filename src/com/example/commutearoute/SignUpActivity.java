@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -28,13 +30,13 @@ public class SignUpActivity extends Activity {
 	 * TODO: remove after connecting to a real authentication system.
 	 */
 	private static final String[] DUMMY_CREDENTIALS = new String[] {
-			"foo@example.com:hello", "bar@example.com:world" };
+		"foo@example.com:hello", "bar@example.com:world" };
 
 	/**
 	 * The default username field
 	 */
-	 public static final String USERNAME = "com.example.commutearoute.USERNAME";
-	
+	public static final String USERNAME = "com.example.commutearoute.USERNAME";
+
 	/**
 	 * The default Username to populate the Username field with.
 	 */
@@ -60,7 +62,23 @@ public class SignUpActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		/*
+		 *  Check if user has logged in before (if a username exists).
+		 *  If so, skip ahead to MainActivity.
+		 */
+		
+		SharedPreferences userDetails = getSharedPreferences(Constants.USER_DETAILS, MODE_PRIVATE);
+		String username = userDetails.getString("username", "");
+		String password = userDetails.getString("password", "");
+		if (!username.isEmpty()) {
+			Intent intent = new Intent(this, MainActivity.class);
+			intent.putExtra(USERNAME, "my username is: " + username);
+			startActivity(intent);
+		}
+
 		setContentView(R.layout.activity_sign_up);
+
+
 
 		// Set up the login form.
 		mUsername = getIntent().getStringExtra(EXTRA_USERNAME);
@@ -69,17 +87,17 @@ public class SignUpActivity extends Activity {
 
 		mPasswordView = (EditText) findViewById(R.id.password);
 		mPasswordView
-				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-					@Override
-					public boolean onEditorAction(TextView textView, int id,
-							KeyEvent keyEvent) {
-						if (id == R.id.login || id == EditorInfo.IME_NULL) {
-							attemptLogin();
-							return true;
-						}
-						return false;
-					}
-				});
+		.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+			@Override
+			public boolean onEditorAction(TextView textView, int id,
+					KeyEvent keyEvent) {
+				if (id == R.id.login || id == EditorInfo.IME_NULL) {
+					attemptLogin();
+					return true;
+				}
+				return false;
+			}
+		});
 
 		mLoginFormView = findViewById(R.id.login_form);
 		mLoginStatusView = findViewById(R.id.login_status);
@@ -146,23 +164,28 @@ public class SignUpActivity extends Activity {
 			// form field with an error.
 			focusView.requestFocus();
 		} else {
-			// Logged in correctly. Go to Home screen.
-
-			Intent intent = new Intent(this, MainActivity.class);
+			// Logged in correctly. Store the credentials and Go to Home screen.
+			SharedPreferences userDetails = getSharedPreferences(Constants.USER_DETAILS, MODE_PRIVATE);
+			SharedPreferences.Editor editor = userDetails.edit();
+			String username = mUsernameView.getText().toString().trim();
+			editor.putString("username", username);
+			editor.putString("password", mPasswordView.getText().toString().trim());
+			editor.commit();
+			Toast.makeText(this, "User details are saved. You will not have to login again.",
+					Toast.LENGTH_SHORT).show();
 			
-			// get the username
-			EditText e = (EditText) findViewById(R.id.username);
-			String username = e.getText().toString();
+			Intent intent = new Intent(this, MainActivity.class);
+
 			intent.putExtra(USERNAME, username);
 
-		    startActivity(intent);
-		/*	// Show a progress spinner, and kick off a background task to
+			startActivity(intent);
+			/*	// Show a progress spinner, and kick off a background task to
 			// perform the user login attempt.
 			mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
 			showProgress(true);
 			mAuthTask = new UserLoginTask();
 			mAuthTask.execute((Void) null);
-			*/
+			 */
 		}
 	}
 
@@ -180,25 +203,25 @@ public class SignUpActivity extends Activity {
 
 			mLoginStatusView.setVisibility(View.VISIBLE);
 			mLoginStatusView.animate().setDuration(shortAnimTime)
-					.alpha(show ? 1 : 0)
-					.setListener(new AnimatorListenerAdapter() {
-						@Override
-						public void onAnimationEnd(Animator animation) {
-							mLoginStatusView.setVisibility(show ? View.VISIBLE
-									: View.GONE);
-						}
-					});
+			.alpha(show ? 1 : 0)
+			.setListener(new AnimatorListenerAdapter() {
+				@Override
+				public void onAnimationEnd(Animator animation) {
+					mLoginStatusView.setVisibility(show ? View.VISIBLE
+							: View.GONE);
+				}
+			});
 
 			mLoginFormView.setVisibility(View.VISIBLE);
 			mLoginFormView.animate().setDuration(shortAnimTime)
-					.alpha(show ? 0 : 1)
-					.setListener(new AnimatorListenerAdapter() {
-						@Override
-						public void onAnimationEnd(Animator animation) {
-							mLoginFormView.setVisibility(show ? View.GONE
-									: View.VISIBLE);
-						}
-					});
+			.alpha(show ? 0 : 1)
+			.setListener(new AnimatorListenerAdapter() {
+				@Override
+				public void onAnimationEnd(Animator animation) {
+					mLoginFormView.setVisibility(show ? View.GONE
+							: View.VISIBLE);
+				}
+			});
 		} else {
 			// The ViewPropertyAnimator APIs are not available, so simply show
 			// and hide the relevant UI components.
@@ -206,7 +229,7 @@ public class SignUpActivity extends Activity {
 			mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
 		}
 	}
-	
+
 	/**
 	 * Represents an asynchronous login/registration task used to authenticate
 	 * the user.
@@ -244,7 +267,7 @@ public class SignUpActivity extends Activity {
 				finish();
 			} else {
 				mPasswordView
-						.setError(getString(R.string.error_incorrect_password));
+				.setError(getString(R.string.error_incorrect_password));
 				mPasswordView.requestFocus();
 			}
 		}

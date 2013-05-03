@@ -51,29 +51,27 @@
         android:id="@+id/prof_home_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/prof_home"
         android:layout_marginBottom="5dp"
         android:layout_toRightOf="@+id/prof_home"
-        android:layout_alignBaseline="@+id/prof_home"
-        android:text="home" 
         android:textColor="@color/blue" />
-    
+
     <TextView
         android:id="@+id/prof_work"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/prof_home"
+        android:layout_below="@+id/prof_home"
         android:layout_marginBottom="5dp"
-        android:layout_below="@+id/prof_home" 
         android:text="@string/work_address" />
 
     <TextView
         android:id="@+id/prof_work_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/prof_work"
         android:layout_alignLeft="@+id/prof_home_field"
         android:layout_marginBottom="5dp"
-        android:layout_alignBaseline="@+id/prof_work"
-        android:text="work"
         android:textColor="@color/blue" />
 
     <TextView
@@ -84,34 +82,67 @@
         android:layout_below="@+id/prof_work"
         android:layout_marginBottom="5dp"
         android:text="@string/car_make" />
-    
-     <TextView
+
+    <TextView
         android:id="@+id/prof_car_make_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/prof_car_make"
         android:layout_alignLeft="@+id/prof_work_field"
         android:layout_marginBottom="5dp"
-        android:layout_alignBaseline="@+id/prof_car_make"
-        android:text="car make"  
-        android:textColor="@color/blue" /> 
-     
+        android:textColor="@color/blue" />
+
     <TextView
         android:id="@+id/prof_car_model"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/prof_car_make"
         android:layout_below="@+id/prof_car_make"
-        android:layout_marginBottom="5dp" 
+        android:layout_marginBottom="5dp"
         android:text="@string/car_model" />
 
     <TextView
         android:id="@+id/prof_car_model_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/prof_car_model"
         android:layout_alignLeft="@+id/prof_car_make_field"
         android:layout_marginBottom="5dp"
-        android:layout_alignBaseline="@+id/prof_car_model"
-        android:text="car model"
-        android:textColor="@color/blue" /> 
+        android:textColor="@color/blue" />
+
+    <Button
+        android:id="@+id/change_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/profile_pic"
+        android:layout_below="@+id/prof_car_model"
+        android:layout_marginBottom="5dp"
+        android:text="@string/change_home" />
+
+    <Button
+        android:id="@+id/change_work"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/profile_pic"
+        android:layout_below="@+id/change_home"
+        android:layout_marginBottom="5dp"
+        android:text="@string/change_work" />
+
+    <Button
+        android:id="@+id/change_car_make"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/profile_pic"
+        android:layout_below="@+id/change_work"
+        android:layout_marginBottom="5dp"
+        android:text="@string/change_car_make" />
+
+    <Button
+        android:id="@+id/change_car_model"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/profile_pic"
+        android:layout_below="@+id/change_car_make"
+        android:text="@string/change_car_model" />
 
 </RelativeLayout>

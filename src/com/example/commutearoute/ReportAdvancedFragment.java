@@ -1,13 +1,16 @@
 package com.example.commutearoute;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class ReportAdvancedFragment extends Fragment {
+public class ReportAdvancedFragment extends Fragment implements View.OnClickListener {
 	public ReportAdvancedFragment() {
         setRetainInstance(true);
 	}
@@ -20,7 +23,26 @@ public class ReportAdvancedFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_report_advanced,
 				container, false);
+		
+		// make buttons clickable. Will send you to map page with placemark.
+		ImageButton pothole = (ImageButton) v.findViewById(R.id.btn_pothole);
+		ImageButton badRoad = (ImageButton) v.findViewById(R.id.btn_bad_road);
+		ImageButton construction = (ImageButton) v.findViewById(R.id.btn_construction);
+		pothole.setOnClickListener(this);
+		badRoad.setOnClickListener(this);
+		construction.setOnClickListener(this);
+		
+		
 		return v;
 	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		Intent intent = new Intent(getActivity(), MapActivity.class);
+		ReportAdvancedFragment.this.startActivity(intent);
+	}
+	
+	
 
 }

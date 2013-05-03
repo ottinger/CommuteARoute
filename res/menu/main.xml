@@ -22,4 +22,5 @@
         android:showAsAction="always"
         android:title="@string/show_map" />
 
+    
 </menu>

@@ -169,10 +169,6 @@ public class ReportActivity extends FragmentActivity implements
 				fragment = new ReportAdvancedFragment();
 				return fragment;
 			}
-	/*		ReportSimpleFragment fragment =  new ReportSimpleFragment();
-			Bundle args = new Bundle();
-			args.putInt(ReportSectionFragment.ARG_SECTION_NUMBER, position + 1);
-			fragment.setArguments(args); */
 			return fragment;
 		}
 

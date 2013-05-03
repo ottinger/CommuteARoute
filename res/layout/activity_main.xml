@@ -48,9 +48,9 @@
         android:layout_height="60dp"
         android:layout_below="@+id/edit_end"
         android:layout_marginTop="20dp"
-        android:background="@drawable/navbar_background"
         android:orientation="horizontal" >
-
+<!--         android:background="@drawable/navbar_background"
+ -->
         <RadioButton
             android:id="@+id/car"
             android:layout_width="60dip"

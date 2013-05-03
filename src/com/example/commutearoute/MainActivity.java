@@ -2,8 +2,12 @@ package com.example.commutearoute;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.text.Html;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,49 +27,30 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
 		
+		setContentView(R.layout.activity_main);
+
+		populateUsername();
+				
 		// TODO: lookup level from past use -- OR from username database
 		Integer currentLevel = 1;
 		setLevel(currentLevel);
-		populateUsername();
+		
 	}
 	
 	/** 
-	 * Populate the username field. Currently retrieves from sign in page
-	 * TODO: Store username elsewhere after first login and retrieve from there
+	 * Populate the username field.
 	 */
 	private void populateUsername() {
-		// get the username from signupactivity
-		Intent intent = getIntent();
-		String username = intent.getStringExtra(SignUpActivity.USERNAME);
+		// get the username from sharedpreferences
+		SharedPreferences userDetails = getSharedPreferences(Constants.USER_DETAILS, MODE_PRIVATE);
+		String username = userDetails.getString("username", "");
 		
 		// create the text view
 		TextView textView = (TextView) findViewById(R.id.username_field);
 		textView.setText(username);
 	}
 
-	// This was code for old navbar on bottom before discovering ActionBar/OptionsMenu
-	/*
-		RadioButton radioButton;
-		radioButton = (RadioButton) findViewById(R.id.home_button);
-		radioButton.setOnCheckedChangeListener(btnNavBarOnCheckedChangeListener);
-		radioButton = (RadioButton) findViewById(R.id.stats_button);
-		radioButton.setOnCheckedChangeListener(btnNavBarOnCheckedChangeListener);
-		radioButton = (RadioButton) findViewById(R.id.report_button);
-		radioButton.setOnCheckedChangeListener(btnNavBarOnCheckedChangeListener);
-		radioButton = (RadioButton) findViewById(R.id.show_map_button);
-		radioButton.setOnCheckedChangeListener(btnNavBarOnCheckedChangeListener);
-	}
-
-	private CompoundButton.OnCheckedChangeListener btnNavBarOnCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
-		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-			if (isChecked) {
-				Toast.makeText(MainActivity.this, buttonView.getText(), Toast.LENGTH_SHORT).show();
-			}
-		}
-	};
-*/
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -134,4 +119,29 @@ public class MainActivity extends Activity {
     	TextView textView = (TextView) findViewById(R.id.level);
     	textView.setText(Html.fromHtml(LEVEL + "<b>" + Integer.toString(currentLevel)));
     }
+    
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+    	// if user hits back on home screen, prompt them if they want to exit
+    	if (keyCode == KeyEvent.KEYCODE_BACK) {
+    		exitWithBack();
+    		return true;
+    	}
+    	return super.onKeyDown(keyCode, event);
+    	
+    }
+
+	protected void exitWithBack() {
+		AlertDialog exitAlert = new AlertDialog.Builder(this)
+			.setMessage("Exit CommuteARoute?")
+			.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					finish();
+				}
+			})
+			.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {					
+				}
+			})
+			.show();
+	}
 }
