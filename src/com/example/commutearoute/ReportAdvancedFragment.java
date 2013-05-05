@@ -7,10 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class ReportAdvancedFragment extends Fragment implements View.OnClickListener {
+	
+	public final static String REPORT_TYPE = "com.example.commutearoute.REPORT_TYPE";
+
 	public ReportAdvancedFragment() {
         setRetainInstance(true);
 	}
@@ -41,6 +45,23 @@ public class ReportAdvancedFragment extends Fragment implements View.OnClickList
 		// TODO Auto-generated method stub
 		Intent intent = new Intent(getActivity(), MapActivity.class);
 		ReportAdvancedFragment.this.startActivity(intent);
+		
+		// Add type of report 
+		String type = "";
+		switch (v.getId()) {
+		case R.id.btn_pothole: 
+			type = "Pothole";
+			break;
+		case R.id.btn_bad_road:
+			type = "Bad Road";
+			break;
+		case R.id.btn_construction:
+			type = "Construction";
+			break;
+		default:
+			break;
+		}
+		intent.putExtra(REPORT_TYPE, type);
 	}
 	
 	

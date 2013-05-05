@@ -259,6 +259,9 @@ public class MainActivity extends Activity {
 		// Add destination address
 		EditText editText = (EditText) findViewById(R.id.edit_end);
 		String destination = editText.getText().toString();
+		if (destination.isEmpty()) {
+			destination = editText.getHint().toString();
+		}
 		intent.putExtra(DESTINATION, destination);
 
 		// Add mode of transportation

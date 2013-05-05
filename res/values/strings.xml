@@ -43,5 +43,6 @@
     <string name="apply">Apply</string>
     <string name="skip">Skip Tutorial</string>
     <string name="cont">Continue</string>
+    <string name="title_activity_directions">Directions</string>
 
 </resources>

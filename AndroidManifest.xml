@@ -17,9 +17,8 @@
         <activity
             android:name="com.example.commutearoute.SignUpActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustResize|stateVisible" 
-            android:noHistory="true" >
-            
+            android:noHistory="true"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -74,6 +73,15 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyCHCSMeqEp3pFiF_pOcWfHFU-gsSQB08hU" />
+
+        <activity
+            android:name="com.example.commutearoute.DirectionsActivity"
+            android:label="@string/title_activity_directions"
+            android:parentActivityName="com.example.commutearoute.MapActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.commutearoute.MapActivity" />
+        </activity>
     </application>
 
     <permission
