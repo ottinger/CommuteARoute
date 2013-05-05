@@ -44,5 +44,7 @@
     <string name="skip">Skip Tutorial</string>
     <string name="cont">Continue</string>
     <string name="title_activity_directions">Directions</string>
-
+    <string name="stats_summary_header">Previous 30 days. Figures below are estimated using your commuting data.</string>
+	<string name="stats_alt_header">Estimated cost/time of alternative transportation methods:</string>
+	<string name="change">Change</string>
 </resources>

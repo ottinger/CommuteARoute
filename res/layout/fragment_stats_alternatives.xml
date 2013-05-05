@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/stats_alt_header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/stats_alt_header"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <RadioGroup
+        android:id="@+id/radio_alt_stats"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="30dp"
+        android:tag="radio_button_bitch" >
+        
+        <RadioButton 
+            android:id="@+id/stats_alt_car"
+            android:tag="@string/car"
+            />
+        
+        <RadioButton 
+            android:id="@+id/stats_alt_transit"
+            android:tag="@string/transit" />
+        
+        <RadioButton
+            android:id="@+id/stats_alt_bike"
+            android:tag="@string/bike" />
+    </RadioGroup>
+
+    <Button 
+        android:id="@+id/stats_change_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/change" />
+</LinearLayout>

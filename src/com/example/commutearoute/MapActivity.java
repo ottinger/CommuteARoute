@@ -9,6 +9,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -17,9 +18,11 @@ import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v4.app.NavUtils;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
@@ -33,6 +36,7 @@ public class MapActivity extends Activity {
 	private String destination;
 	private String mode;
 	
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,6 +56,11 @@ public class MapActivity extends Activity {
 		if (tempmode != null) {
 			mode = tempmode;
 		}
+		
+		if (mode.equals("Transit")) {
+			ImageButton btn = (ImageButton) findViewById(R.id.btn_directions);
+			btn.setBackground(getResources().getDrawable(R.drawable.directions_transit));
+		}
 
 		// check intent to see if coming from report
 		Intent rIntent = getIntent();
@@ -65,6 +74,11 @@ public class MapActivity extends Activity {
 		/* Use the LocationManager class to obtain GPS locations */
 		LocationManager mLocManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
+		// Creating a criteria object to retrieve provider
+        Criteria criteria = new Criteria();
+
+        // Getting the name of the best provider
+        String provider = mLocManager.getBestProvider(criteria, true);
 		LocationListener mLocListener = new MyLocationListener();
 		boolean isGPS = mLocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
@@ -73,7 +87,7 @@ public class MapActivity extends Activity {
 			intent.putExtra("enabled", true);
 			sendBroadcast(intent);
 		}
-		mLocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 20000, 0, mLocListener);
+		mLocManager.requestLocationUpdates(provider, 20000, 0, mLocListener);
 
 	}
 
