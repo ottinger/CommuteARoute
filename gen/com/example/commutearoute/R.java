@@ -160,38 +160,26 @@ containing a value of this type.
         public static final int directions=0x7f02000c;
         public static final int directions_transit=0x7f02000d;
         public static final int home=0x7f02000e;
-        public static final int home_selected=0x7f02000f;
-        public static final int ic_launcher=0x7f020010;
-        public static final int map=0x7f020011;
-        public static final int marker_accident=0x7f020012;
-        public static final int marker_bus_overcrowded=0x7f020013;
-        public static final int marker_late=0x7f020014;
-        public static final int marker_pothole=0x7f020015;
-        public static final int mph=0x7f020016;
-        public static final int navbar_background=0x7f020017;
-        public static final int navbar_backgroundselector=0x7f020018;
-        public static final int navbar_highlight=0x7f020019;
-        public static final int navbar_home_selector=0x7f02001a;
-        public static final int navbar_map_selector=0x7f02001b;
-        public static final int navbar_report_selector=0x7f02001c;
-        public static final int navbar_stats_selector=0x7f02001d;
-        public static final int prof_pic=0x7f02001e;
-        public static final int report=0x7f02001f;
-        public static final int report_btn_accident=0x7f020020;
-        public static final int report_btn_bad_road=0x7f020021;
-        public static final int report_btn_construction=0x7f020022;
-        public static final int report_btn_late=0x7f020023;
-        public static final int report_btn_overcrowded=0x7f020024;
-        public static final int report_btn_pothole=0x7f020025;
-        public static final int report_btn_pothole2=0x7f020026;
-        public static final int report_selected=0x7f020027;
-        public static final int show_map=0x7f020028;
-        public static final int show_map_selected=0x7f020029;
-        public static final int stats=0x7f02002a;
-        public static final int stats_selected=0x7f02002b;
-        public static final int walk=0x7f02002c;
-        public static final int walk_custom=0x7f02002d;
-        public static final int walk_selected=0x7f02002e;
+        public static final int ic_launcher=0x7f02000f;
+        public static final int map=0x7f020010;
+        public static final int marker_accident=0x7f020011;
+        public static final int marker_bus_overcrowded=0x7f020012;
+        public static final int marker_late=0x7f020013;
+        public static final int marker_pothole=0x7f020014;
+        public static final int mph=0x7f020015;
+        public static final int prof_pic=0x7f020016;
+        public static final int report=0x7f020017;
+        public static final int report_btn_accident=0x7f020018;
+        public static final int report_btn_bad_road=0x7f020019;
+        public static final int report_btn_construction=0x7f02001a;
+        public static final int report_btn_late=0x7f02001b;
+        public static final int report_btn_overcrowded=0x7f02001c;
+        public static final int report_btn_pothole=0x7f02001d;
+        public static final int report_btn_pothole2=0x7f02001e;
+        public static final int stats=0x7f02001f;
+        public static final int walk=0x7f020020;
+        public static final int walk_custom=0x7f020021;
+        public static final int walk_selected=0x7f020022;
     }
     public static final class id {
         public static final int action_forgot_password=0x7f04004d;
@@ -451,8 +439,7 @@ containing a value of this type.
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f080001;
-        public static final int LoginFormContainer=0x7f080003;
-        public static final int navbar_button=0x7f080002;
+        public static final int LoginFormContainer=0x7f080002;
     }
     public static final class styleable {
         /** Attributes that can be used with a MapAttrs.
