@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
 		}
 
 		populateUsername();
-		
+
 		// Set up "End" field with work address
 		populateEnd();
 
@@ -123,7 +123,7 @@ public class MainActivity extends Activity {
 
 	protected void startProfileDialog() {
 		final ImageView v = (ImageView) findViewById(R.id.prof_circle);
-		
+
 		AlertDialog dialog = new AlertDialog.Builder(this)
 		.setMessage("Manage your profile by clicking here.")
 		.setPositiveButton(R.string.skip, new DialogInterface.OnClickListener() {
@@ -138,13 +138,13 @@ public class MainActivity extends Activity {
 				startStatsDialog();
 			}
 		}).show(); 
-		
+
 		v.setVisibility(v.VISIBLE);
 	}
-	
+
 	protected void startStatsDialog() {
 		final ImageView v = (ImageView) findViewById(R.id.arrow1);
-		
+
 		AlertDialog dialog = new AlertDialog.Builder(this)
 		.setMessage("Check your commuting stats here.")
 		.setPositiveButton(R.string.skip, new DialogInterface.OnClickListener() {
@@ -160,12 +160,12 @@ public class MainActivity extends Activity {
 			}
 		}).show(); 
 		v.setVisibility(v.VISIBLE);
-		
+
 	}
-	
+
 	protected void startReportDialog() {
 		final ImageView v = (ImageView) findViewById(R.id.arrow2);
-		
+
 		AlertDialog dialog = new AlertDialog.Builder(this)
 		.setMessage("Report a traffic incident here.")
 		.setPositiveButton(R.string.skip, new DialogInterface.OnClickListener() {
@@ -182,10 +182,10 @@ public class MainActivity extends Activity {
 		}).show(); 
 		v.setVisibility(v.VISIBLE);
 	}
-	
+
 	protected void startMapDialog() {
 		final ImageView v = (ImageView) findViewById(R.id.arrow3);
-	
+
 		AlertDialog dialog = new AlertDialog.Builder(this)
 		.setMessage("View map here.")
 		.setPositiveButton(R.string.skip, new DialogInterface.OnClickListener() {

@@ -23,7 +23,8 @@
 
         <RadioButton
             android:id="@+id/stats_alt_car"
-            android:tag="@string/car" />
+            android:tag="@string/car" 
+            android:checked="true" />
 
         <RadioButton
             android:id="@+id/stats_alt_transit"

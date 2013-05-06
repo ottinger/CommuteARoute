@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
-    
-    <!--  Graph goes here. Right now is just a blank TextView saying "GRAPHS HERE" -->
+    android:layout_height="match_parent" >
+
+    <!--
+    Graph goes here. Right now is just a blank TextView saying "GRAPHS HERE" 
     <TextView
         android:id="@+id/graph"
         android:layout_width="wrap_content"
@@ -13,10 +12,79 @@
         android:text="GRAPHS HERE"
         android:textSize="40sp"
         android:textStyle="bold" />
+    -->
+
+    <ImageView
+        android:id="@+id/graph"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/graph_money" />
+
+    <TextView
+        android:id="@+id/graph_text"
+        android:layout_width="wrap_content"
+        android:layout_toRightOf="@+id/graph"
+        android:layout_height="wrap_content"
+        android:text="Click to change:"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <RadioGroup
+        android:id="@+id/radio_graphs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/graph_text"
+        android:layout_toRightOf="@+id/graph"
+        android:orientation="vertical" >
+
+        <RadioButton
+            android:id="@+id/graph_car"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CAR"
+            android:textColor="@color/red" 
+            android:tag="@string/car"
+            android:checked="true" />
+
+        <RadioButton
+            android:id="@+id/graph_transit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TRANSIT"
+            android:textColor="@color/blue" 
+            android:tag="@string/transit" />
+
+        <RadioButton
+            android:id="@+id/graph_bike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BIKE"
+            android:textColor="@color/orange"
+            android:tag="@string/bike" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/graph_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radio_graphs"
+        android:layout_toRightOf="@+id/graph"
+        android:text="USER"
+        android:textColor="@color/green" />
+
+    <Button
+        android:id="@+id/stats_change_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/graph_user"
+        android:layout_toRightOf="@+id/graph"
+        android:text="@string/change" />
     
-    <Spinner 
+    <Spinner
         android:id="@+id/graph_spinner"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/graph" />
 
-</LinearLayout>
+</RelativeLayout>

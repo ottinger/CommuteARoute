@@ -1,5 +1,7 @@
 package com.example.commutearoute;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.ClipData.Item;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,10 +11,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class StatsGraphsFragment extends Fragment implements OnItemSelectedListener {
+public class StatsGraphsFragment extends Fragment implements OnItemSelectedListener, View.OnClickListener {
 	
 	private View v;
 	
@@ -35,22 +41,52 @@ public class StatsGraphsFragment extends Fragment implements OnItemSelectedListe
 		spinner.setAdapter(adapter);
 		
 		spinner.setOnItemSelectedListener(this);
-		
+	
+		Button b = (Button) v.findViewById(R.id.stats_change_btn);
+		b.setOnClickListener(this);
 		return v;	
 	}
 
+	@SuppressLint("NewApi")
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int pos,
 			long id) {
 		// TODO Auto-generated method stub
-		TextView tv = (TextView) v.findViewById(R.id.graph);
-		tv.setText(parent.getItemAtPosition(pos).toString());
+	//	TextView tv = (TextView) v.findViewById(R.id.graph);
+	//	tv.setText(parent.getItemAtPosition(pos).toString());
+		ImageView iv = (ImageView) v.findViewById(R.id.graph);
+		switch (pos) {
+		case 0: 
+			iv.setBackground(getResources().getDrawable(R.drawable.graph_money));
+			break;
+		case 1: 
+			iv.setBackground(getResources().getDrawable(R.drawable.graph_time));
+			break;
+		default:
+			iv.setBackground(getResources().getDrawable(R.drawable.stats));
+			break;
+		}
 	}
 
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	/**
+	 * Handles clicking of "Change" button. Starts new MapActivity with selected mode of transportation.
+	 */
+	@Override
+	public void onClick(View view) {
+		Intent intent = new Intent(getActivity(), MapActivity.class);
+
+		RadioGroup radioGroup = (RadioGroup) v.findViewById(R.id.radio_graphs);
+		int selected = radioGroup.getCheckedRadioButtonId();
+		RadioButton button = (RadioButton) v.findViewById(selected);
+		intent.putExtra(MainActivity.TRANSPORT_MODE, button.getTag().toString());
+
+		startActivity(intent);
 	}
 	
 	

@@ -11,4 +11,7 @@ public class Constants {
 	 * constant string for determining session
 	 */
 	public static final String TUTORIAL = "tutorial";
+
+	public static final String LONG = "longitude";
+	public static final String LAT = "latitude";
 }

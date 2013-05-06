@@ -24,10 +24,10 @@
     <string name="title_report_advanced">Advanced</string>
     <string name="profile_pic">Profile Picture</string>
     <string name="latest_traffic">Latest Traffic Alerts</string>
-    <string name="car">Car</string>
-    <string name="transit">Transit</string>
-    <string name="bike">Bike</string>
-    <string name="walk">Walk</string>
+    <string name="car">driving</string>
+    <string name="transit">transit</string>
+    <string name="bike">bicycling</string>
+    <string name="walk">walking</string>
     <string name="title_activity_profile">User Profile</string>
     <string name="home_address">HOME ADDRESS:</string>
     <string name="work_address">WORK ADDRESS:</string>

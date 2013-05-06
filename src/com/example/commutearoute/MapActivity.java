@@ -37,7 +37,7 @@ public class MapActivity extends Activity {
 	private String destination;
 	private String mode;
 	private boolean firstEntry = true;
-
+	
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,7 @@ public class MapActivity extends Activity {
 		String tempmode = intent.getStringExtra(MainActivity.TRANSPORT_MODE);
 		if (tempmode != null) {
 			mode = tempmode;
-			if (mode.equals("Transit")) {
+			if (mode.equals("transit")) {
 				ImageButton btn = (ImageButton) findViewById(R.id.btn_directions);
 				btn.setBackground(getResources().getDrawable(R.drawable.directions_transit));
 			}
@@ -214,6 +214,15 @@ public class MapActivity extends Activity {
 		Intent intent = new Intent(this, DirectionsActivity.class);
 		intent.putExtra(MainActivity.DESTINATION, destination);
 		intent.putExtra(MainActivity.TRANSPORT_MODE, mode);
+		
+		/* 
+		 * TODO: use lat and long for current location
+		 * currently using my home address 
+		 */
+		double lat = 38.982702;
+		double lon = -76.932685;
+		intent.putExtra(Constants.LAT, lat);
+		intent.putExtra(Constants.LONG, lon);
 		startActivity(intent);
 	}
 
