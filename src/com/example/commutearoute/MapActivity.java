@@ -5,6 +5,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -30,12 +31,13 @@ import android.os.Build;
 
 public class MapActivity extends Activity {
 
-	private GoogleMap mMap;
+	private static GoogleMap mMap;
 	private String report_type;
 	private boolean report = false;
 	private String destination;
 	private String mode;
-	
+	private boolean firstEntry = true;
+
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,52 +45,49 @@ public class MapActivity extends Activity {
 		setContentView(R.layout.activity_map);
 		// Show the Up button in the action bar.
 		setupActionBar();
-		
+
 		// Get the destination if coming from Home screen 'Go' button
-		Intent hIntent = getIntent();
-		String dest = hIntent.getStringExtra(MainActivity.DESTINATION);
+		Intent intent = getIntent();
+		String dest = intent.getStringExtra(MainActivity.DESTINATION);
 		if (dest != null) {
 			destination = dest;
 		}
-		
+
 		// Get the mode of transportation
-		String tempmode = hIntent.getStringExtra(MainActivity.TRANSPORT_MODE);
+		String tempmode = intent.getStringExtra(MainActivity.TRANSPORT_MODE);
 		if (tempmode != null) {
 			mode = tempmode;
-		}
-		
-		if (mode.equals("Transit")) {
-			ImageButton btn = (ImageButton) findViewById(R.id.btn_directions);
-			btn.setBackground(getResources().getDrawable(R.drawable.directions_transit));
+			if (mode.equals("Transit")) {
+				ImageButton btn = (ImageButton) findViewById(R.id.btn_directions);
+				btn.setBackground(getResources().getDrawable(R.drawable.directions_transit));
+			}
 		}
 
 		// check intent to see if coming from report
-		Intent rIntent = getIntent();
-		String type = rIntent.getStringExtra(ReportAdvancedFragment.REPORT_TYPE);
+		String type = intent.getStringExtra(ReportActivity.REPORT_TYPE);
 		if (type != null && !type.isEmpty()) {
 			report_type = type;
 			report = true;
 		}
-		
+
 		setUpMapIfNeeded();
 		/* Use the LocationManager class to obtain GPS locations */
 		LocationManager mLocManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
 		// Creating a criteria object to retrieve provider
-        Criteria criteria = new Criteria();
+		/*   Criteria criteria = new Criteria();
 
         // Getting the name of the best provider
         String provider = mLocManager.getBestProvider(criteria, true);
-		LocationListener mLocListener = new MyLocationListener();
-		boolean isGPS = mLocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+		 */	LocationListener mLocListener = new MyLocationListener();
+		 boolean isGPS = mLocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-		if (!isGPS){
-			Intent intent = new Intent("android.location.GPS_ENABLED_CHANGE");
-			intent.putExtra("enabled", true);
-			sendBroadcast(intent);
-		}
-		mLocManager.requestLocationUpdates(provider, 20000, 0, mLocListener);
-
+		 if (!isGPS){
+			 Intent newIntent = new Intent("android.location.GPS_ENABLED_CHANGE");
+			 intent.putExtra("enabled", true);
+			 sendBroadcast(newIntent);
+		 }
+		 mLocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 20000, 0, mLocListener);
 	}
 
 	/**
@@ -102,32 +101,50 @@ public class MapActivity extends Activity {
 			if (location != null) {
 				// ---Get current location latitude, longitude
 				LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
-				
-				//This shows marker if reporting advanced
-				if (report) {
-					mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type));
-				}
 				// move camera to current location instantly
-				mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15));         
+				mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15));  
+
+				//This shows marker if reporting advanced
+				if (report && firstEntry) {
+					firstEntry = false;
+					Marker marker;
+					if (report_type.equals("Pothole")) {
+						marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type)
+								.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_pothole))
+								.draggable(true));
+					} else if (report_type.equals("Bus Overcrowded")){
+						marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type)
+								.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_bus_overcrowded)));
+					} else if (report_type.equals("Late Bus")){
+						marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type)
+								.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_late)));
+					} else if (report_type.equals("Accident")) {
+						marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type)
+								.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_accident)));
+					} else {
+						marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type));
+					}
+				}
+
 			}
 		}
 
 		@Override
 		public void onProviderDisabled(String provider) {
 			// TODO Auto-generated method stub
-	         Toast.makeText( getApplicationContext(), "Gps Disabled", Toast.LENGTH_SHORT).show();
+			Toast.makeText( getApplicationContext(), "Gps Disabled", Toast.LENGTH_SHORT).show();
 		}
 
 		@Override
 		public void onProviderEnabled(String provider) {
 			// TODO Auto-generated method stub
-	         Toast.makeText( getApplicationContext(), "Gps Enabled", Toast.LENGTH_SHORT).show();			
+			Toast.makeText( getApplicationContext(), "Gps Enabled", Toast.LENGTH_SHORT).show();			
 		}
 
 		@Override
 		public void onStatusChanged(String provider, int status, Bundle extras) {
 			// TODO Auto-generated method stub
-			
+
 		}
 	}
 
@@ -192,7 +209,7 @@ public class MapActivity extends Activity {
 			 return super.onOptionsItemSelected(item);
 		}
 	}
-	
+
 	public void goToDirections(View v) {
 		Intent intent = new Intent(this, DirectionsActivity.class);
 		intent.putExtra(MainActivity.DESTINATION, destination);

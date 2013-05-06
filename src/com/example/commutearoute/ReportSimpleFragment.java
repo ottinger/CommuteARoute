@@ -44,11 +44,29 @@ public class ReportSimpleFragment extends Fragment implements View.OnClickListen
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
+		final int id = v.getId();
 		AlertDialog confirmAlert = new AlertDialog.Builder(getActivity())
 		.setMessage("Report the incident?")
 		.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
 				Intent intent = new Intent(getActivity(), MapActivity.class);
+				
+				// Add type of report 
+				String type = "";
+				switch (id) {
+				case R.id.btn_accident: 
+					type = "Accident";
+					break;
+				case R.id.btn_late:
+					type = "Late Bus";
+					break;
+				case R.id.btn_overcrowded:
+					type = "Bus Overcrowded";
+					break;
+				default:
+					break;
+				}
+				intent.putExtra(ReportActivity.REPORT_TYPE, type);
 				ReportSimpleFragment.this.startActivity(intent);
 			}
 		})

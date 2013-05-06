@@ -13,8 +13,6 @@ import android.widget.TextView;
 
 public class ReportAdvancedFragment extends Fragment implements View.OnClickListener {
 	
-	public final static String REPORT_TYPE = "com.example.commutearoute.REPORT_TYPE";
-
 	public ReportAdvancedFragment() {
         setRetainInstance(true);
 	}
@@ -34,8 +32,7 @@ public class ReportAdvancedFragment extends Fragment implements View.OnClickList
 		ImageButton construction = (ImageButton) v.findViewById(R.id.btn_construction);
 		pothole.setOnClickListener(this);
 		badRoad.setOnClickListener(this);
-		construction.setOnClickListener(this);
-		
+		construction.setOnClickListener(this);	
 		
 		return v;
 	}
@@ -44,7 +41,6 @@ public class ReportAdvancedFragment extends Fragment implements View.OnClickList
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		Intent intent = new Intent(getActivity(), MapActivity.class);
-		ReportAdvancedFragment.this.startActivity(intent);
 		
 		// Add type of report 
 		String type = "";
@@ -61,7 +57,9 @@ public class ReportAdvancedFragment extends Fragment implements View.OnClickList
 		default:
 			break;
 		}
-		intent.putExtra(REPORT_TYPE, type);
+		intent.putExtra(ReportActivity.REPORT_TYPE, type);
+		ReportAdvancedFragment.this.startActivity(intent);
+
 	}
 	
 	

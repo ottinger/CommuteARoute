@@ -22,6 +22,8 @@ import android.widget.TextView;
 
 public class ReportActivity extends FragmentActivity implements
 		ActionBar.TabListener {
+	
+	public final static String REPORT_TYPE = "com.example.commutearoute.REPORT_TYPE";
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide

@@ -19,7 +19,7 @@
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="25dp"
-        android:background="@drawable/report_btn_pothole" />
+        android:background="@drawable/report_btn_pothole2" />
 
     <ImageButton
         android:id="@+id/btn_bad_road"

@@ -32,19 +32,19 @@ public class ProfileActivity extends Activity implements View.OnClickListener {
 		TextView uView = (TextView) findViewById(R.id.prof_username);
 		uView.setText(username);
 
-		String home = userDetails.getString("home", "home");
+		String home = userDetails.getString("home", "");
 		TextView hView = (TextView) findViewById(R.id.prof_home_field); 
 		hView.setText(home);
 
-		String work = userDetails.getString("work", "work");
+		String work = userDetails.getString("work", "");
 		TextView wView = (TextView) findViewById(R.id.prof_work_field);
 		wView.setText(work);
 
-		String car_make = userDetails.getString("carmake", "car make");
+		String car_make = userDetails.getString("carmake", "");
 		TextView makeView = (TextView) findViewById(R.id.prof_car_make_field);
 		makeView.setText(car_make);
 
-		String car_model = userDetails.getString("carmodel", "car model");
+		String car_model = userDetails.getString("carmodel", "");
 		TextView modelView = (TextView) findViewById(R.id.prof_car_model_field);
 		modelView.setText(car_model);
 
