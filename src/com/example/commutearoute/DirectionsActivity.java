@@ -1,10 +1,7 @@
 package com.example.commutearoute;
 
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -12,29 +9,25 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.protocol.BasicHttpContext;
-import org.apache.http.protocol.HttpContext;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.support.v4.app.NavUtils;
-import android.text.Html;
-import android.text.format.DateFormat;
 
 public class DirectionsActivity extends Activity {
-
+	// TODO: Make it so that the directions button (in MapActivity) doesn't show or 
+	// isn't usable until we have location. (Otherwise, the app crashes)
+	// TODO: show proper transit information (eg bus number and arrival time), as well as
+	// estimated duration of trip. (Right now, just gives where we board the bus)
+	
 	private String destination = "";
 	private String mode = "";
 
@@ -127,10 +120,11 @@ public class DirectionsActivity extends Activity {
 			heading.setText("Directions to " + destination + " by " + mode + ":");
 			String list = "";
 			for (int i = 0 ; i < directions.size(); i++) {
-				list += i+1 + ". " + directions.get(i) + "\n";
+				list += i+1 + ". " + directions.get(i) + "<br>";
 			}
 
-			// TODO: figure out how to put in spaces with this dumb html
+			// CHANGED: above, changed "\n" to "<br>" (since we're converting from html.) It prints
+			// the line breaks properly now!
 			listView.setText(Html.fromHtml(list));
 		}
 	}

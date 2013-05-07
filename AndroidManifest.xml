@@ -70,9 +70,10 @@
                 android:value="com.example.commutearoute.MainActivity" />
         </activity>
 
+        <!-- NOTE: replaced API key. The map wasn't showing with the existing one? -michael -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCHCSMeqEp3pFiF_pOcWfHFU-gsSQB08hU" />
+            android:value="AIzaSyD8gwUEtxYA7Cj5JmyZrglED5Ty0kl2TUw" />
 
         <activity
             android:name="com.example.commutearoute.DirectionsActivity"

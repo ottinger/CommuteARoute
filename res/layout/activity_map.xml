@@ -15,13 +15,13 @@
         android:layout_height="wrap_content" />
     -->
 
+	<!-- Removed a couple lines from fragment that were giving errors (xmlns, mapType). 
+		 I think they were set to defaults anyway? (feel free to fix if i'm wrong!) -->
     <fragment
-        xmlns:map="http://schemas.android.com/apk/res-auto"
         android:id="@+id/map_fragment"
         android:name="com.google.android.gms.maps.MapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        map:mapType="normal" />
+        android:layout_height="match_parent" />
 
     <ImageView
         android:id="@+id/mph"
