@@ -91,10 +91,13 @@ public class DirectionsActivity extends Activity {
 			this.activity = activity;
 		}
 		protected ArrayList<String> doInBackground(String ... urls) {
-			//double latitude, double longitude, String destination2);
 
-			String tag = "html_instructions";
+			String instr_tag = "html_instructions";
+			String duration_tag = "duration";
+			String tag = "text";
 			ArrayList<String> instr_list = new ArrayList<String>();
+			String durationStr = "";
+			Integer duration = 0;
 			HttpResponse response = null;
 			try {
 				URL url = new URL(urlString);
@@ -102,18 +105,29 @@ public class DirectionsActivity extends Activity {
 				DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 				Document doc = builder.parse(in);
 				if (doc != null) {
-					NodeList nl;
-					nl = doc.getElementsByTagName(tag);
-					if (nl.getLength() > 0) {
-						for (int i = 0; i < nl.getLength(); i++) {
-							Node node = nl.item(i);
+					NodeList n1, n2;
+					n1 = doc.getElementsByTagName(instr_tag);
+					n2 = doc.getElementsByTagName(duration_tag);
+					if (n1.getLength() > 0) {
+						for (int i = 0; i < n1.getLength(); i++) {
+							Node node = n1.item(i);
 							String instruction = node.getTextContent();
 							instr_list.add(instruction);
 						}
 					} else {
 						// No points found
 					}
+					if (n2.getLength() > 0) {
+						for (int i = 0; i < n2.getLength(); i++) {
+							Node node = n2.item(i).getLastChild();
+							durationStr = node.getTextContent();
+							durationStr = durationStr.substring(0,durationStr.indexOf(" "));
+							duration += Integer.parseInt(durationStr);
+						}
+					}
 				}
+				// Last element in instr_list is the duration
+				instr_list.add(duration.toString());
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -126,10 +140,10 @@ public class DirectionsActivity extends Activity {
 			TextView listView = (TextView) findViewById(R.id.direction_list);
 			heading.setText("Directions to " + destination + " by " + mode + ":");
 			String list = "";
-			for (int i = 0 ; i < directions.size(); i++) {
-				list += i+1 + ". " + directions.get(i) + "\n";
+			for (int i = 0 ; i < directions.size()-1; i++) {
+				list += i+1 + ". " + directions.get(i) + "<br>";
 			}
-
+			list += "Duration: " + directions.get(directions.size()-1);
 			// TODO: figure out how to put in spaces with this dumb html
 			listView.setText(Html.fromHtml(list));
 		}

@@ -21,6 +21,8 @@
         android:name="com.google.android.gms.maps.MapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        map:cameraTargetLng="-76.94518"
+        map:cameraTargetLat="38.986008"
         map:mapType="normal" />
 
     <ImageView

@@ -37,7 +37,8 @@ public class MapActivity extends Activity {
 	private String destination;
 	private String mode;
 	private boolean firstEntry = true;
-	
+	private LatLng currentLocation;
+
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -75,19 +76,30 @@ public class MapActivity extends Activity {
 		LocationManager mLocManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
 		// Creating a criteria object to retrieve provider
-		/*   Criteria criteria = new Criteria();
+		Criteria criteria = new Criteria();
 
-        // Getting the name of the best provider
-        String provider = mLocManager.getBestProvider(criteria, true);
-		 */	LocationListener mLocListener = new MyLocationListener();
-		 boolean isGPS = mLocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-
+		// Getting the name of the best provider
+		String provider = mLocManager.getBestProvider(criteria, true);
+		LocationListener mLocListener = new MyLocationListener();
+		boolean isGPS = mLocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+		/*
 		 if (!isGPS){
 			 Intent newIntent = new Intent("android.location.GPS_ENABLED_CHANGE");
 			 intent.putExtra("enabled", true);
 			 sendBroadcast(newIntent);
 		 }
-		 mLocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 20000, 0, mLocListener);
+		 */
+
+		// TODO: update the current provider (probably in MyLocationListener) if it's no longer accessible.
+		// (eg: we lose sight of GPS satellites, but can still get a wifi/cell signal)
+		if (!isGPS){
+			// CHANGED: Use network provider rather than GPS if GPS not functioning. We'll get some
+			// sort of location either from the cell tower or based on local wi-fi APs. (In the case of
+			// poor GPS reception indoors, no map appears)
+			mLocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 20000, 0, mLocListener);
+		} else {
+			mLocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 20000, 0, mLocListener);
+		}
 	}
 
 	/**
@@ -100,32 +112,49 @@ public class MapActivity extends Activity {
 
 			if (location != null) {
 				// ---Get current location latitude, longitude
-				LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
+				//	LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());		
+
+				// CHANGED: made currentLocation accessible by all methods (eg making the directions intent)
+				currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
+
 				// move camera to current location instantly
 				mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15));  
 
 				//This shows marker if reporting advanced
-				if (report && firstEntry) {
-					firstEntry = false;
-					Marker marker;
-					if (report_type.equals("Pothole")) {
-						marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type)
-								.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_pothole))
-								.draggable(true));
-					} else if (report_type.equals("Bus Overcrowded")){
-						marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type)
-								.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_bus_overcrowded)));
-					} else if (report_type.equals("Late Bus")){
-						marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type)
-								.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_late)));
-					} else if (report_type.equals("Accident")) {
-						marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type)
-								.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_accident)));
-					} else {
-						marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type));
-					}
-				}
+				showMarkers();
 
+			} else {
+				// CHANGED: handle case of no location available. I think this only happens if there's no
+				// GPS, cell network, or wifi by which we can get coordinates. It shows you're in North
+				// Korea if this is the case.
+				currentLocation = new LatLng(39,125.75); // hardcoded coordinates for Pyongyang, DPRK
+				Toast.makeText( getApplicationContext(), "Cannot find location", Toast.LENGTH_SHORT).show();
+				mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15));  
+				showMarkers();
+			}
+		}
+
+		private void showMarkers() {
+			// TODO Auto-generated method stub
+			if (report && firstEntry) {
+				firstEntry = false;
+				Marker marker;
+				if (report_type.equals("Pothole")) {
+					marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type)
+							.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_pothole))
+							.draggable(true));
+				} else if (report_type.equals("Bus Overcrowded")){
+					marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type)
+							.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_bus_overcrowded)));
+				} else if (report_type.equals("Late Bus")){
+					marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type)
+							.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_late)));
+				} else if (report_type.equals("Accident")) {
+					marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type)
+							.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_accident)));
+				} else {
+					marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type));
+				}
 			}
 		}
 
@@ -214,15 +243,20 @@ public class MapActivity extends Activity {
 		Intent intent = new Intent(this, DirectionsActivity.class);
 		intent.putExtra(MainActivity.DESTINATION, destination);
 		intent.putExtra(MainActivity.TRANSPORT_MODE, mode);
-		
+
 		/* 
 		 * TODO: use lat and long for current location
 		 * currently using my home address 
 		 */
-		double lat = 38.982702;
+		/*double lat = 38.982702;
 		double lon = -76.932685;
 		intent.putExtra(Constants.LAT, lat);
 		intent.putExtra(Constants.LONG, lon);
+
+		 */
+		// CHANGED: use current location for lat/long
+		intent.putExtra(Constants.LAT, currentLocation.latitude);
+		intent.putExtra(Constants.LONG, currentLocation.longitude);
 		startActivity(intent);
 	}
 
