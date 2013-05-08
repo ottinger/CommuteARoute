@@ -51,7 +51,7 @@ import android.os.Build;
 
 public class MapActivity extends Activity {
 
-	private static GoogleMap mMap;
+	private GoogleMap mMap;
 	private String report_type;
 	private boolean report = false;
 	private String destination;
@@ -68,20 +68,20 @@ public class MapActivity extends Activity {
 		// Show the Up button in the action bar.
 		setupActionBar();
 
-		// Get the destination if coming from Home screen 'Go' button
+		ImageButton btn = (ImageButton) findViewById(R.id.btn_directions);
+		// Get the destination
 		Intent intent = getIntent();
 		String dest = intent.getStringExtra(MainActivity.DESTINATION);
-		if (dest != null) {
+		if (dest != null && !dest.isEmpty()) {
 			destination = dest;
 		}
 
 		// Get the mode of transportation
 		String tempmode = intent.getStringExtra(MainActivity.TRANSPORT_MODE);
-		if (tempmode != null) {
+		if (tempmode != null && !tempmode.isEmpty()) {
 			mode = tempmode;
 			if (mode.equals("transit")) {
-				ImageButton btn = (ImageButton) findViewById(R.id.btn_directions);
-				btn.setBackground(getResources().getDrawable(R.drawable.directions_transit));
+				btn.setBackground(getResources().getDrawable(R.drawable.directionsbus));
 			}
 		}
 
@@ -90,6 +90,8 @@ public class MapActivity extends Activity {
 		if (type != null && !type.isEmpty()) {
 			report_type = type;
 			report = true;
+			btn.setVisibility(btn.INVISIBLE);
+
 		}
 
 		setUpMapIfNeeded();
@@ -101,25 +103,23 @@ public class MapActivity extends Activity {
 
 		// Getting the name of the best provider
 		String provider = mLocManager.getBestProvider(criteria, true);
-		LocationListener mLocListener = new MyLocationListener();
-		boolean isGPS = mLocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-		// TODO: update the current provider (probably in MyLocationListener) if it's no longer accessible.
-		// (eg: we lose sight of GPS satellites, but can still get a wifi/cell signal)
-		if (!isGPS){
-			// CHANGED: Use network provider rather than GPS if GPS not functioning. We'll get some
-			// sort of location either from the cell tower or based on local wi-fi APs. (In the case of
-			// poor GPS reception indoors, no map appears)
-			mLocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 20000, 0, mLocListener);
-		} else {
-			mLocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 20000, 0, mLocListener);
+		// Getting Current Location
+		Location location = mLocManager.getLastKnownLocation(provider);
+
+		LocationListener mLocListener = new MyLocationListener();
+		if(location!=null){
+			 currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
+			 mLocListener.onLocationChanged(location);
 		}
 
-		// Get start latitude and longitude
-		//	double lat = currentLocation.latitude;
-		//	double lon = currentLocation.longitude;
+		mLocManager.requestLocationUpdates(provider, 20000, 0, mLocListener);
+
+		// lat and long for Mckeldin Library
 		double lon = -76.94518;
 		double lat = 38.986008;
+
+		showMarkers();
 
 		String urlString = null;
 		if (mode != null) {
@@ -143,7 +143,7 @@ public class MapActivity extends Activity {
 
 		if (urlString != null) {
 			System.out.println(urlString);
-		//	Toast.makeText( getApplicationContext(), urlString, Toast.LENGTH_LONG).show();
+			//	Toast.makeText( getApplicationContext(), urlString, Toast.LENGTH_LONG).show();
 			RetrieveDirections task = new RetrieveDirections(this, urlString);
 			task.execute();
 
@@ -201,29 +201,6 @@ public class MapActivity extends Activity {
 			}
 		}
 
-		private void showMarkers() {
-			if (report && firstEntry) {
-				firstEntry = false;
-				Marker marker;
-				if (report_type.equals("Pothole")) {
-					marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type)
-							.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_pothole))
-							.draggable(true));
-				} else if (report_type.equals("Bus Overcrowded")){
-					marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type)
-							.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_bus_overcrowded)));
-				} else if (report_type.equals("Late Bus")){
-					marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type)
-							.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_late)));
-				} else if (report_type.equals("Accident")) {
-					marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type)
-							.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_accident)));
-				} else {
-					marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type));
-				}
-			}
-		}
-
 		@Override
 		public void onProviderDisabled(String provider) {
 			// TODO Auto-generated method stub
@@ -243,39 +220,45 @@ public class MapActivity extends Activity {
 		}
 	}
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		setUpMapIfNeeded();
-		LocationManager mLocManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-
-		// Creating a criteria object to retrieve provider
-		Criteria criteria = new Criteria();
-
-		// Getting the name of the best provider
-		String provider = mLocManager.getBestProvider(criteria, true);
-		LocationListener mLocListener = new MyLocationListener();
-		boolean isGPS = mLocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-
-		// TODO: update the current provider (probably in MyLocationListener) if it's no longer accessible.
-		// (eg: we lose sight of GPS satellites, but can still get a wifi/cell signal)
-		if (!isGPS){
-			// CHANGED: Use network provider rather than GPS if GPS not functioning. We'll get some
-			// sort of location either from the cell tower or based on local wi-fi APs. (In the case of
-			// poor GPS reception indoors, no map appears)
-			mLocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 20000, 0, mLocListener);
-		} else {
-			mLocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 20000, 0, mLocListener);
+	public void showMarkers() {
+		if (report && firstEntry) {
+			firstEntry = false;
+			Marker marker;
+			if (report_type.equals("Pothole")) {
+				marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type)
+						.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_pothole))
+						.draggable(true));
+			} else if (report_type.equals("Bad Road")) {
+				marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type)
+					.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_bad_road))
+					.draggable(true));
+			} else if (report_type.equals("Construction")) {
+				marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type)
+						.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_construction))
+						.draggable(true));
+			} else if (report_type.equals("Bus Overcrowded")){
+				marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type)
+						.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_overcrowded)));
+			} else if (report_type.equals("Late Bus")){
+				marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type)
+						.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_late)));
+			} else if (report_type.equals("Accident")) {
+				marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type)
+						.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_accident)));
+			} else {
+				marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title(report_type));
+			}
 		}
 	}
 
 	private void setUpMapIfNeeded() {
 		if (mMap == null) {
 			mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map_fragment)).getMap();
-
+			if (mMap != null) {
+				mMap.setMyLocationEnabled(true);
+				mMap.getUiSettings().setMyLocationButtonEnabled(true);
+			}
 		}
-		mMap.setMyLocationEnabled(true);
-		mMap.getUiSettings().setMyLocationButtonEnabled(true);
 	}
 
 	/**

@@ -59,7 +59,7 @@ public class StatsAlternativesFragment extends Fragment implements View.OnClickL
 		double walkMoney = 0.00;
 		int walkTime = 139;
 		String walkString = "Walking: $" + Double.toString(walkMoney) + "0" + ", " + Integer.toString(walkTime) + " mins";
-		
+
 		// set text fields
 		vCar.setText(carString);
 		vTransit.setText(transitString);
@@ -79,6 +79,9 @@ public class StatsAlternativesFragment extends Fragment implements View.OnClickL
 		RadioButton button = (RadioButton) v.findViewById(selected);
 		intent.putExtra(MainActivity.TRANSPORT_MODE, button.getTag().toString());
 
+		SharedPreferences pref = this.getActivity().getSharedPreferences(Constants.USER_DETAILS, getActivity().MODE_PRIVATE);
+		String dest = pref.getString("work", "");	
+		intent.putExtra(MainActivity.DESTINATION, dest);
 		startActivity(intent);
 	}
 }

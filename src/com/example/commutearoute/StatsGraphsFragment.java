@@ -2,6 +2,7 @@ package com.example.commutearoute;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.ClipData.Item;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -89,6 +90,9 @@ public class StatsGraphsFragment extends Fragment implements OnItemSelectedListe
 		RadioButton button = (RadioButton) v.findViewById(selected);
 		intent.putExtra(MainActivity.TRANSPORT_MODE, button.getTag().toString());
 
+		SharedPreferences pref = this.getActivity().getSharedPreferences(Constants.USER_DETAILS, getActivity().MODE_PRIVATE);
+		String dest = pref.getString("work", "");	
+		intent.putExtra(MainActivity.DESTINATION, dest);
 		startActivity(intent);
 	}
 	

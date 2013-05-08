@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -21,8 +22,6 @@
         android:name="com.google.android.gms.maps.MapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        map:cameraTargetLat="38.986008"
-        map:cameraTargetLng="-76.94518"
         map:mapType="normal" />
 
     <ImageButton
@@ -30,10 +29,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|left"
-        android:background="@drawable/directions"
+        android:background="@drawable/directionsbutton"
         android:onClick="goToDirections" />
 
-    <ImageView
+<!--      <ImageView
         android:id="@+id/eta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,7 +40,7 @@
         android:background="@drawable/eta"
         android:textSize="20sp"
         android:textStyle="bold" />
-
+-->
     <TextView
         android:id="@+id/duration"
         android:layout_width="wrap_content"
