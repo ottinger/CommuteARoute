@@ -13,6 +13,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -72,24 +73,17 @@ public class MapActivity extends Activity {
 		LocationManager mLocManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
 		// Creating a criteria object to retrieve provider
-		/*   Criteria criteria = new Criteria();
+		Criteria criteria = new Criteria();
 
         // Getting the name of the best provider
         String provider = mLocManager.getBestProvider(criteria, true);
-		 */	
+		
 		LocationListener mLocListener = new MyLocationListener();
-		boolean isGPS = mLocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
 		// TODO: update the current provider (probably in MyLocationListener) if it's no longer accessible.
 		// (eg: we lose sight of GPS satellites, but can still get a wifi/cell signal)
-		if (!isGPS){
-			 // CHANGED: Use network provider rather than GPS if GPS not functioning. We'll get some
-			 // sort of location either from the cell tower or based on local wi-fi APs. (In the case of
-			 // poor GPS reception indoors, no map appears)
-			 mLocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 20000, 0, mLocListener);
-		} else {
-			mLocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 20000, 0, mLocListener);
-		}
+		mLocManager.requestLocationUpdates(provider, 2000, 0, mLocListener);
+		currentLocation = new LatLng(39,-77);
 	}
 
 	/**

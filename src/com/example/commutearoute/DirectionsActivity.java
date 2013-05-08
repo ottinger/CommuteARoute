@@ -101,6 +101,7 @@ public class DirectionsActivity extends Activity {
 						for (int i = 0; i < nl.getLength(); i++) {
 							Node node = nl.item(i);
 							String instruction = node.getTextContent();
+							System.out.println(node);
 							instr_list.add(instruction);
 						}
 					} else {
