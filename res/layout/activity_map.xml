@@ -21,16 +21,9 @@
         android:name="com.google.android.gms.maps.MapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        map:cameraTargetLng="-76.94518"
         map:cameraTargetLat="38.986008"
+        map:cameraTargetLng="-76.94518"
         map:mapType="normal" />
-
-    <ImageView
-        android:id="@+id/mph"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|right"
-        android:background="@drawable/mph" />
 
     <ImageButton
         android:id="@+id/btn_directions"
@@ -39,5 +32,31 @@
         android:layout_gravity="top|left"
         android:background="@drawable/directions"
         android:onClick="goToDirections" />
+
+    <ImageView
+        android:id="@+id/eta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|right"
+        android:background="@drawable/eta"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/direction1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center_vertical"
+        android:onClick="goToDirections"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
 </FrameLayout>

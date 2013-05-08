@@ -33,6 +33,10 @@
         <RadioButton
             android:id="@+id/stats_alt_bike"
             android:tag="@string/bike" />
+        
+        <RadioButton
+            android:id="@+id/stats_alt_walk"
+            android:tag="@string/walk" />
     </RadioGroup>
 
     <Button

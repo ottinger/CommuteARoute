@@ -18,6 +18,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -28,6 +29,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 import android.text.Html;
@@ -77,7 +80,7 @@ public class DirectionsActivity extends Activity {
 					+ destination.replaceAll("\\s","") + "&sensor=true&units=imperial" + "&mode=" + mode;
 		}
 		System.out.println(urlString);
-		new RetrieveDirections(this, urlString).execute();
+		new RetrieveDirections(this, urlString).execute(); 
 
 	}
 
@@ -105,9 +108,9 @@ public class DirectionsActivity extends Activity {
 				DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 				Document doc = builder.parse(in);
 				if (doc != null) {
-					NodeList n1, n2;
+					NodeList n1, durNodeList;
 					n1 = doc.getElementsByTagName(instr_tag);
-					n2 = doc.getElementsByTagName(duration_tag);
+					durNodeList = doc.getElementsByTagName(duration_tag);
 					if (n1.getLength() > 0) {
 						for (int i = 0; i < n1.getLength(); i++) {
 							Node node = n1.item(i);
@@ -117,12 +120,16 @@ public class DirectionsActivity extends Activity {
 					} else {
 						// No points found
 					}
-					if (n2.getLength() > 0) {
-						for (int i = 0; i < n2.getLength(); i++) {
-							Node node = n2.item(i).getLastChild();
-							durationStr = node.getTextContent();
-							durationStr = durationStr.substring(0,durationStr.indexOf(" "));
-							duration += Integer.parseInt(durationStr);
+					if (durNodeList.getLength() > 0) {
+						for (int i = 0; i < durNodeList.getLength(); i++) {
+							Node node = durNodeList.item(i);
+							if (node.getNodeType() == Node.ELEMENT_NODE) {
+								Element element = (Element) node;
+								durationStr = element.getElementsByTagName(tag).item(0).getTextContent();
+								durationStr = durationStr.substring(0,durationStr.indexOf(" "));
+								duration += Integer.parseInt(durationStr);
+
+							}
 						}
 					}
 				}
@@ -141,9 +148,9 @@ public class DirectionsActivity extends Activity {
 			heading.setText("Directions to " + destination + " by " + mode + ":");
 			String list = "";
 			for (int i = 0 ; i < directions.size()-1; i++) {
-				list += i+1 + ". " + directions.get(i) + "<br>";
+				list += (i+1) + ". " + directions.get(i) + "<br>";
 			}
-			list += "Duration: " + directions.get(directions.size()-1);
+		//	list += "Duration: " + directions.get(directions.size()-1) + " mins";
 			// TODO: figure out how to put in spaces with this dumb html
 			listView.setText(Html.fromHtml(list));
 		}
@@ -170,6 +177,14 @@ public class DirectionsActivity extends Activity {
 		Intent intent;
 		// Handle item selection
 		switch (item.getItemId()) {
+		case android.R.id.home:
+        	// app icon in action bar clicked; go home
+        	intent = new Intent(this, MapActivity.class);
+        	intent.putExtra(MainActivity.DESTINATION, destination);
+			// Add mode of transportation
+			intent.putExtra(MainActivity.TRANSPORT_MODE, mode);
+			startActivity(intent);
+			return true;
 		case R.id.stats:
 			// stats icon clicked; go to stats page
 			intent = new Intent(this, StatsActivity.class);
@@ -183,6 +198,9 @@ public class DirectionsActivity extends Activity {
 		case R.id.map:
 			// show map button clicked; go to map
 			intent = new Intent(this, MapActivity.class);
+			intent.putExtra(MainActivity.DESTINATION, destination);
+			// Add mode of transportation
+			intent.putExtra(MainActivity.TRANSPORT_MODE, mode);
 			startActivity(intent);
 			return true;
 		default:

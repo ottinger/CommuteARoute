@@ -123,8 +123,11 @@ public class ReportActivity extends FragmentActivity implements
 	        	return true;
 	        case R.id.map:
 	        	// show map button clicked; go to map
-	        	intent = new Intent(this, MapActivity.class);
-	        	startActivity(intent);
+				 intent = new Intent(this, MapActivity.class);
+				 intent.putExtra(MainActivity.DESTINATION, "");
+				 // Add mode of transportation
+				 intent.putExtra(MainActivity.TRANSPORT_MODE, "");
+				 startActivity(intent);
 	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);

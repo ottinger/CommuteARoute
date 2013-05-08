@@ -14,7 +14,7 @@
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/prof_pic"
+        android:background="@drawable/default_icon"
         android:contentDescription="@string/profile_pic"
         android:maxHeight="15sp"
         android:maxWidth="15sp" />
@@ -54,7 +54,7 @@
         android:layout_alignBaseline="@+id/prof_home"
         android:layout_marginBottom="5dp"
         android:layout_toRightOf="@+id/prof_home"
-        android:textColor="@color/blue" />
+        />
 
     <TextView
         android:id="@+id/prof_work"
@@ -72,7 +72,7 @@
         android:layout_alignBaseline="@+id/prof_work"
         android:layout_alignLeft="@+id/prof_home_field"
         android:layout_marginBottom="5dp"
-        android:textColor="@color/blue" />
+       />
 
     <TextView
         android:id="@+id/prof_car_make"
@@ -90,7 +90,7 @@
         android:layout_alignBaseline="@+id/prof_car_make"
         android:layout_alignLeft="@+id/prof_work_field"
         android:layout_marginBottom="5dp"
-        android:textColor="@color/blue" />
+         />
 
     <TextView
         android:id="@+id/prof_car_model"
@@ -108,7 +108,7 @@
         android:layout_alignBaseline="@+id/prof_car_model"
         android:layout_alignLeft="@+id/prof_car_make_field"
         android:layout_marginBottom="5dp"
-        android:textColor="@color/blue" />
+         />
 
     <Button
         android:id="@+id/change_home"

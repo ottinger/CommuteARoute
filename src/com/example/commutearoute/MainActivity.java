@@ -47,6 +47,13 @@ public class MainActivity extends Activity {
 		// Set up "End" field with work address
 		populateEnd();
 
+		// standard alerts. No need to implement backend stuff here, just a constant field
+		TextView tv = (TextView) findViewById(R.id.latest_traffic_alerts);
+		String alerts = "Traffic jam on I-95 eastbound\n" +
+				"Accident at intersection of Baltimore Rd. and Campus Dr.";
+		tv.setText(alerts);
+
+
 		// TODO: lookup level from past use -- OR from SharedPreferences
 		Integer currentLevel = 1;
 		setLevel(currentLevel);
@@ -95,6 +102,8 @@ public class MainActivity extends Activity {
 						String work = wView.getText().toString();
 						if (!work.isEmpty()) {
 							editor.putString("work", work);
+							EditText end = (EditText) findViewById(R.id.edit_end);
+							end.setHint(work);
 						}
 						editor.commit();
 						startProfileDialog();
@@ -244,8 +253,7 @@ public class MainActivity extends Activity {
 			 return true;
 		 case R.id.map:
 			 // show map button clicked; go to map
-			 intent = new Intent(this, MapActivity.class);
-			 startActivity(intent);
+			 goToMap(findViewById(R.id.go_button));
 			 return true;
 		 default:
 			 return super.onOptionsItemSelected(item);
@@ -253,7 +261,7 @@ public class MainActivity extends Activity {
 	}
 
 	/** Called when user clicks the Go button */
-	public void goToMap(View view) {
+	public void goToMap(View v) {
 		Intent intent = new Intent(this, MapActivity.class);
 
 		// Add destination address
@@ -261,6 +269,10 @@ public class MainActivity extends Activity {
 		String destination = editText.getText().toString();
 		if (destination.isEmpty()) {
 			destination = editText.getHint().toString();
+			if (destination.isEmpty()) {
+				Toast.makeText( getApplicationContext(), "You must first enter End field to view map", Toast.LENGTH_SHORT).show();
+				return;
+			}
 		}
 		intent.putExtra(DESTINATION, destination);
 

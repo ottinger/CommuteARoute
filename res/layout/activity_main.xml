@@ -11,14 +11,17 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
-        android:background="@drawable/prof_pic"
+        android:background="@drawable/default_icon"
         android:contentDescription="@string/profile_pic"
         android:maxHeight="15sp"
         android:maxWidth="15sp"
         android:onClick="goToProfile" />
 
-    <!--  Arrows position is hardcoded to work when phone is held veritcally
-        Need to learn how to adjust to screen rotation -->
+    <!--
+          Arrows position is hardcoded to work when phone is held veritcally
+        Need to learn how to adjust to screen rotation
+    -->
+
     <ImageView
         android:id="@+id/prof_circle"
         android:layout_width="wrap_content"
@@ -80,16 +83,26 @@
         android:layout_below="@+id/go_button"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
-        android:text="@string/latest_traffic" />
+        android:text="@string/latest_traffic"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/latest_traffic_alerts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/latest_traffic"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp" 
+        android:layout_alignLeft="@+id/profile_pic"/>
 
     <RadioGroup
         android:id="@+id/radio_transport_mode"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_below="@+id/edit_end"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal" >
+        android:orientation="horizontal" >
 
         <!-- android:background="@drawable/navbar_background" -->
 
@@ -154,7 +167,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/edit_end"
         android:layout_alignBottom="@+id/edit_end"
-        android:layout_alignLeft="@+id/radio_transport_mode"
+        android:layout_alignLeft="@+id/profile_pic"
+        android:layout_below="@+id/profile_pic"
         android:text="@string/end" />
 
     <TextView
@@ -163,7 +177,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/edit_start"
         android:layout_alignBottom="@+id/edit_start"
-        android:layout_alignLeft="@+id/end"
+        android:layout_alignLeft="@+id/profile_pic"
+        android:layout_below="@+id/profile_pic"
         android:text="@string/start" />
 
     <!-- <include layout="@layout/activity_navbar"/> -->

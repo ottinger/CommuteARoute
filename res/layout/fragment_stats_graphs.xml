@@ -19,72 +19,61 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/graph_money" />
+        android:background="@drawable/graphmoneyfinal" />
 
-    <TextView
-        android:id="@+id/graph_text"
-        android:layout_width="wrap_content"
-        android:layout_toRightOf="@+id/graph"
-        android:layout_height="wrap_content"
-        android:text="Click to change:"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <RadioGroup
-        android:id="@+id/radio_graphs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/graph_text"
-        android:layout_toRightOf="@+id/graph"
-        android:orientation="vertical" >
-
-        <RadioButton
-            android:id="@+id/graph_car"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CAR"
-            android:textColor="@color/red" 
-            android:tag="@string/car"
-            android:checked="true" />
-
-        <RadioButton
-            android:id="@+id/graph_transit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TRANSIT"
-            android:textColor="@color/blue" 
-            android:tag="@string/transit" />
-
-        <RadioButton
-            android:id="@+id/graph_bike"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="BIKE"
-            android:textColor="@color/orange"
-            android:tag="@string/bike" />
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/graph_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/radio_graphs"
-        android:layout_toRightOf="@+id/graph"
-        android:text="USER"
-        android:textColor="@color/green" />
-
-    <Button
-        android:id="@+id/stats_change_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/graph_user"
-        android:layout_toRightOf="@+id/graph"
-        android:text="@string/change" />
-    
     <Spinner
         android:id="@+id/graph_spinner"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/graph" />
+
+    <RadioGroup
+        android:id="@+id/radio_graphs"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/graph_spinner"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/graph_car"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:tag="@string/car"
+            android:text="CAR"
+            android:textColor="@color/car" />
+
+        <RadioButton
+            android:id="@+id/graph_transit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="@string/transit"
+            android:text="TRANSIT"
+            android:textColor="@color/transit" />
+
+        <RadioButton
+            android:id="@+id/graph_bike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="@string/bike"
+            android:text="BIKE"
+            android:textColor="@color/bike" />
+
+        <RadioButton
+            android:id="@+id/graph_walk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="@string/walk"
+            android:text="WALK"
+            android:textColor="@color/walk" />
+    </RadioGroup>
+    
+    <Button
+        android:id="@+id/stats_change_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:layout_below="@+id/radio_graphs"
+		android:layout_centerHorizontal="true"
+        android:text="@string/change" />
 
 </RelativeLayout>

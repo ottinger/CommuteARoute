@@ -39,27 +39,32 @@ public class StatsAlternativesFragment extends Fragment implements View.OnClickL
 		TextView vCar = (TextView) v.findViewById(R.id.stats_alt_car);
 		TextView vTransit = (TextView) v.findViewById(R.id.stats_alt_transit);
 		TextView vBike = (TextView) v.findViewById(R.id.stats_alt_bike);
-
+		TextView vWalk = (TextView) v.findViewById(R.id.stats_alt_walk);
 		// get car data
-		double carMoney = 149.99;
-		int carTime = 91;
+		double carMoney = 35.15;
+		int carTime = 50;
 		String carString = "Car: $" + Double.toString(carMoney) + ", " + Integer.toString(carTime) + " mins";
 
 		// get transit data
-		double transitMoney = 106.88;
-		int transitTime = 80;
-		String transitString = "Transit: $" + Double.toString(transitMoney) + ", " + Integer.toString(transitTime) + " mins";
+		double transitMoney = 18.50;
+		int transitTime = 65;
+		String transitString = "Transit: $" + Double.toString(transitMoney) + "0" + ", " + Integer.toString(transitTime) + " mins";
 
 		// get biking data
-		double bikeMoney = 0;
-		int bikeTime = 148;
-		String bikeString = "Cycling: $" + Double.toString(bikeMoney) + ", " + Integer.toString(bikeTime) + " mins";
+		double bikeMoney = 0.00;
+		int bikeTime = 117;
+		String bikeString = "Cycling: $" + Double.toString(bikeMoney)+ "0" + ", " + Integer.toString(bikeTime) + " mins";
 
+		// get walking data
+		double walkMoney = 0.00;
+		int walkTime = 139;
+		String walkString = "Walking: $" + Double.toString(walkMoney) + "0" + ", " + Integer.toString(walkTime) + " mins";
+		
 		// set text fields
 		vCar.setText(carString);
 		vTransit.setText(transitString);
 		vBike.setText(bikeString);
-
+		vWalk.setText(walkString);
 	}
 
 	/**

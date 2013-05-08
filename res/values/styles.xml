@@ -25,8 +25,9 @@
         <item name="android:padding">16dp</item>
     </style>
 
-    <color name="blue">#3f62fa</color>
-    <color name="red">#ff4444</color>
-    <color name="orange">#fa9f2a</color>
-    <color name="green">#48cc58</color>
+    <color name="car">#c55a11</color>
+    <color name="transit">#f4b183</color>
+    <color name="bike">#ffd966</color>
+    <color name="walk">#a9d18e</color>
+    
 </resources>

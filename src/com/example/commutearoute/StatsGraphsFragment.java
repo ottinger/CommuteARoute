@@ -57,13 +57,16 @@ public class StatsGraphsFragment extends Fragment implements OnItemSelectedListe
 		ImageView iv = (ImageView) v.findViewById(R.id.graph);
 		switch (pos) {
 		case 0: 
-			iv.setBackground(getResources().getDrawable(R.drawable.graph_money));
+			iv.setBackground(getResources().getDrawable(R.drawable.graphmoneyfinal));
 			break;
 		case 1: 
-			iv.setBackground(getResources().getDrawable(R.drawable.graph_time));
+			iv.setBackground(getResources().getDrawable(R.drawable.graphtimefinal));
 			break;
-		default:
-			iv.setBackground(getResources().getDrawable(R.drawable.stats));
+		case 2:
+			iv.setBackground(getResources().getDrawable(R.drawable.graphspeedfinal));
+			break;
+		case 3:
+			iv.setBackground(getResources().getDrawable(R.drawable.graphdistancefinal));
 			break;
 		}
 	}

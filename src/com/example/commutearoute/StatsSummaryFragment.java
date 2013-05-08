@@ -2,6 +2,7 @@ package com.example.commutearoute;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,23 +27,23 @@ public class StatsSummaryFragment extends Fragment {
 		// TODO Auto-generated method stub
 		TextView data = (TextView) v.findViewById(R.id.stats_data);
 		// get money spent
-		double money = 149.99;
+		double money = 37.99;
 		// get commute time
-		int time = 91;
+		int time = 45;		
 		// get speed
-		int speed = 55;
+		int speed = 58;
 		// get distance
-		double distance = 10;
+		double distance = 19.5;
 		String dataString = "";
-		dataString += "Total money spent: $" 
-				+ Double.toString(money) + "\n"
-				+ "Average commute time: " 
-				+ Integer.toString(time) + " min\n"
-				+ "Average speed: " 
-				+ Integer.toString(speed) + " mph\n"
-				+ "Average distance: " 
+		dataString += "<b>Total money spent:</b> $" 
+				+ Double.toString(money) + "<br>"
+				+ "<b>Average commute time:</b> " 
+				+ Integer.toString(time) + " min<br>"
+				+ "<b>Average speed:</b> " 
+				+ Integer.toString(speed) + " mph<br>"
+				+ "<b>Average distance:</b> " 
 				+ Double.toString(distance) + " miles";
-		data.setText(dataString);
+		data.setText(Html.fromHtml(dataString));
 				
 	}
 	
