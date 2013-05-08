@@ -12,9 +12,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class ReportAdvancedFragment extends Fragment implements View.OnClickListener {
-	
+
 	public ReportAdvancedFragment() {
-        setRetainInstance(true);
+		setRetainInstance(true);
 	}
 
 	/**
@@ -25,7 +25,7 @@ public class ReportAdvancedFragment extends Fragment implements View.OnClickList
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_report_advanced,
 				container, false);
-		
+
 		// make buttons clickable. Will send you to map page with placemark.
 		ImageButton pothole = (ImageButton) v.findViewById(R.id.btn_pothole);
 		ImageButton badRoad = (ImageButton) v.findViewById(R.id.btn_bad_road);
@@ -33,7 +33,7 @@ public class ReportAdvancedFragment extends Fragment implements View.OnClickList
 		pothole.setOnClickListener(this);
 		badRoad.setOnClickListener(this);
 		construction.setOnClickListener(this);	
-		
+
 		return v;
 	}
 
@@ -41,7 +41,7 @@ public class ReportAdvancedFragment extends Fragment implements View.OnClickList
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		Intent intent = new Intent(getActivity(), MapActivity.class);
-		
+
 		// Add type of report 
 		String type = "";
 		switch (v.getId()) {
@@ -58,10 +58,12 @@ public class ReportAdvancedFragment extends Fragment implements View.OnClickList
 			break;
 		}
 		intent.putExtra(ReportActivity.REPORT_TYPE, type);
+		intent.putExtra(MainActivity.DESTINATION, "");
+		intent.putExtra(MainActivity.TRANSPORT_MODE, "");
 		ReportAdvancedFragment.this.startActivity(intent);
 
 	}
-	
-	
+
+
 
 }

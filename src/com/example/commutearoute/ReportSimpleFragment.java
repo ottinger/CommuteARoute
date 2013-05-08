@@ -67,6 +67,8 @@ public class ReportSimpleFragment extends Fragment implements View.OnClickListen
 					break;
 				}
 				intent.putExtra(ReportActivity.REPORT_TYPE, type);
+				intent.putExtra(MainActivity.DESTINATION, "");
+				intent.putExtra(MainActivity.TRANSPORT_MODE, "");
 				ReportSimpleFragment.this.startActivity(intent);
 			}
 		})
