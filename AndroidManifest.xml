@@ -72,7 +72,7 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCHCSMeqEp3pFiF_pOcWfHFU-gsSQB08hU" />
+            android:value="AIzaSyD8gwUEtxYA7Cj5JmyZrglED5Ty0kl2TUw" />
 
         <activity
             android:name="com.example.commutearoute.DirectionsActivity"
