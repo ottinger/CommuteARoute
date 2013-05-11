@@ -9,13 +9,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MapActivity" >
 
-    <!--
-          <TextView
-        android:id="@+id/destination"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    -->
-
 	<!-- removed xmlns and mapType; these cause problems on my system for some reason -->
     <fragment
         android:id="@+id/map_fragment"
